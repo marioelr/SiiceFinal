@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cfd6af2f05aa4cf8bf2fbaed37afc3fb" Name="Diagram1">
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Acta" Width="1.5" PointX="5.25" PointY="1.625" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Acta_Usuario" Width="1.5" PointX="7.5" PointY="1.625" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Agremiado" Width="1.5" PointX="7.5" PointY="5" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Compania" Width="1.5" PointX="3" PointY="13.25" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Deduccion" Width="1.5" PointX="9.75" PointY="9.625" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Departamento" Width="1.5" PointX="5.25" PointY="13.375" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Empleado" Width="1.5" PointX="10.5" PointY="4.75" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_EstadoCivil" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Gestion" Width="1.5" PointX="12.75" PointY="5.125" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Persona" Width="1.5" PointX="3" PointY="4.5" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Rol" Width="1.5" PointX="3" PointY="1.625" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_TipoGestion" Width="1.5" PointX="10.5" PointY="1.75" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_TipoUsuario" Width="1.5" PointX="3" PointY="10" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Usuario" Width="1.5" PointX="5.25" PointY="5" />
+        <AssociationConnector Association="SII_DBModel.t_acta0_fk" />
+        <AssociationConnector Association="SII_DBModel.t_usuario2_fk" />
+        <AssociationConnector Association="SII_DBModel.t_agremiado0_fk" />
+        <AssociationConnector Association="SII_DBModel.t_ltrabajo0_fk" />
+        <AssociationConnector Association="SII_DBModel.t_usuario0_fk" />
+        <AssociationConnector Association="SII_DBModel.t_compania_fk" />
+        <AssociationConnector Association="SII_DBModel.t_ltrabajo1_fk" />
+        <AssociationConnector Association="SII_DBModel.t_empleado_fk" />
+        <AssociationConnector Association="SII_DBModel.t_usuario1_fk" />
+        <AssociationConnector Association="SII_DBModel.t_ecivil_fk" />
+        <AssociationConnector Association="SII_DBModel.t_tgestion_fk" />
+        <AssociationConnector Association="SII_DBModel.t_persona_fk" />
+        <AssociationConnector Association="SII_DBModel.t_rol_fk" />
+        <AssociationConnector Association="SII_DBModel.t_tipousu_fk" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,176 @@
+﻿@model Sindicato_v1.Models.ViewModels.GestionesViewModel
+@{
+    ViewBag.Title = "Nueva Gestion";
+}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+<br />
+<br />
+<br />
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="~/Usuario/Documentos">Documentos</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+                <li><a href="~/Usuario/close_session" onclick="return LeaveConfirm()"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="https://localhost:44378/#inicio">SIICE - Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li><a href="/Gestiones/Gestiones/">Gestiones</a></li>
+    <li>Nueva Gestión</li>
+</ul>
+
+<div>
+    <h2>Nueva Gestión</h2>
+    <h4>Para iniciar una nueva gestión, por favor complete el siguiente formulario</h4>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Nueva_Gestion", "Gestiones", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        @Html.HiddenFor(g => g.id_Emp)
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(g => g.id_TipoGes)
+                @Html.DropDownListFor(g => g.id_TipoGes, ViewBag.GestionList as SelectList, "Selecione el tipo de gestion", new { @class = "form-control validate[required]" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(g => g.motivo)
+                @Html.TextBoxFor(g => g.motivo, "", new { @class = "form-control validate[required]", placeholder = "Motivo por el que se inicia la gestión" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <h3>Vacaciones</h3>
+            <hr />
+            <div>
+                @Html.LabelFor(g => g.f_inicio)
+                @Html.EditorFor(model => model.f_inicio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.f_inicio, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(g => g.f_fin)
+                @Html.EditorFor(model => model.f_fin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.f_fin, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(g => g.tot_vac)
+                @Html.TextBoxFor(g => g.tot_vac, "", new { @class = "form-control", @readonly = "true" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(g => g.vac_rest)
+                @Html.TextBoxFor(g => g.vac_rest, "", new { @class = "form-control", @readonly = "true" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(g => g.vac_uti)
+                @Html.TextBoxFor(g => g.vac_uti, "", new { @class = "form-control", @readonly = "true" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(g => g.vac_solic)
+                @Html.TextBoxFor(g => g.vac_solic, "", new { @class = "form-control", @id = "txtid", @readonly = "true" })
+                <label id="txtid"></label>
+                @Html.ValidationMessageFor(d => d.vac_solic, null, new { @class = "text-danger " })
+            </div>
+        </div>
+        <div class="column">
+            <h3>Ausencias</h3>
+            <hr />
+            <div>
+                @Html.LabelFor(g => g.cant_au_injus)
+                @Html.TextBoxFor(g => g.cant_au_injus, "", new { @class = "form-control", @readonly = "true" })
+                @Html.ValidationMessageFor(d => d.cant_au_injus, null, new { @class = "text-danger " })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(g => g.cant_au_jus)
+                @Html.TextBoxFor(g => g.cant_au_jus, "", new { @class = "form-control", @readonly = "true" })
+                @Html.ValidationMessageFor(d => d.cant_au_jus, null, new { @class = "text-danger " })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(g => g.f_aus)
+                <br />
+                @Html.EditorFor(model => model.f_fin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.f_fin, "", new { @class = "text-danger" })
+            </div>
+            @*<br />
+            <div>
+                @Html.LabelFor(g => g.cant_aus)
+                @Html.TextBoxFor(g => g.cant_aus, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.cant_aus, null, new { @class = "text-danger " })
+            </div>*@
+        </div>
+    </div>
+    <br />
+    <div style="text-align: right">
+        <input value="Confirmar" class="btn btn-custom1" type="submit" />
+    </div>
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+
+<script type="text/javascript">
+    $('#f_fin').change(function () {
+
+        var date1 = moment($('#f_inicio').val());
+        var date2 = moment($('#f_fin').val());
+
+        if (date1 > date2) {
+            swal("¡Atención!", "La fecha de inicio no puede ser mayor la fecha de fin");
+            $('#txtid').val(0);
+            $('#f_inicio').val(null);
+            $('#f_fin').val(null);
+
+        } else {
+            var res = (date2.diff(date1, 'days'));
+            $('#txtid').val(res);
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+

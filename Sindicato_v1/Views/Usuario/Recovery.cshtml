@@ -1,0 +1,75 @@
+﻿@model Sindicato_v1.Models.ViewModels.RecoveryPasswordViewModel
+@{
+    ViewBag.Title = "Cambio de contraseña";
+}
+<br />
+<br />
+<br />
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+    </div>
+</nav>
+
+<h2 class="text-center">Cambio de contraseña</h2>
+
+@*<div class="row">
+    <div class="col-sm-12">
+        <div class="form-style">
+            <form action="@Url.Content("~/Usuario/Recovery" )" method="post">
+                @Html.HiddenFor(d => d.token)
+                <label>Escribe aqui tu nueva contraseña:</label>
+                @Html.PasswordFor(d => d.Contraseña, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Contraseña, null, new { style = "color:red;" })
+                <br />
+                <label>Vuelve a escribir tu contraseña:</label>
+                @Html.PasswordFor(d => d.Contraseña2, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Contraseña2, null, new { style = "color:red;" })
+                <br />
+                <div class="text-right">
+                    <button class="btn btn-primary">Confirmar cambio  de contraseña</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>*@
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img style="padding: 40px 0px 40px;" src="~/Content/Resources/Images/logo_Login.png" id="icon" alt="User Icon" />
+        </div>
+
+        <div class="text-center">
+            <h4>Para recuperar su cuenta por favor complete lo siguiente:</h4>
+        </div>
+        <!-- Recovery Form -->
+        <form action="@Url.Content("~/Usuario/Recovery")" method="post">
+            <label>Escriba aqui su nueva contraseña:</label>
+            @Html.PasswordFor(d => d.Contraseña, new { @class = "form-control fadeIn first", id = "login-form", type = "password", placeholder = "Nueva contraseña" })
+            <label>Confirme su nueva contraseña:</label>
+            @Html.PasswordFor(d => d.Contraseña2, new { @class = "form-control fadeIn second", id = "login-form", type = "password", placeholder = "Confirmar contraseña" })
+
+            <input type="submit" class="fadeIn fourth" value="Continuar">
+
+        </form>
+
+
+        <!-- Remind Passowrd -->
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="~/Content/login-style.css" rel="stylesheet" />

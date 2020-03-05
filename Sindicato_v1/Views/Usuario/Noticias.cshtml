@@ -1,0 +1,202 @@
+﻿@model List<Sindicato_v1.Models.ViewModels.AddNoticiasViewModel>
+
+@{
+    ViewBag.Title = "Noticias";
+}
+
+<br />
+<br />
+<br />
+
+<head>
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/css/nivo-lightbox.css" rel="stylesheet" />
+    <link href="~/css/templatemo-style.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://kit.fontawesome.com/2c060e3026.js" crossorigin="anonymous"></script>
+</head>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/EditaPerfil/Editar_Perfil">Perfil</a></li>
+                <li><a href="~/Usuario/Actas">Actas</a></li>
+                <li><a href="~/Usuario/Noticias">Noticias</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+                <li><a href="~/Usuario/close_session" onclick="return LeaveConfirm()"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="https://localhost:44378/#inicio">SIICE - Inicio</a></li>
+    <li><a href="/Usuario/Perfil/">Mi perfil</a></li>
+    <li>Noticias</li>
+</ul>
+
+<!-- about header section -->
+<div id="about-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12"></div>
+        </div>
+    </div>
+</div>
+
+<!-- team section -->
+<div id="team">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8 col-sm-12">
+                <h1>¡Consulte nuestras últimas noticias!</h1>
+                <p>
+                    Consulte de forma constante las noticias que se van agregando para que se mantenga al tanto sobre los útlmitos acontecimientos que se han presentado en el sindicato.
+                </p>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div>
+                @foreach (var noticia in Model)
+                {
+                    <div class="col-sm-4">
+                        <div class="pnl panel-group panel-warning">
+                            <div class="pnl-heading"><h4>@noticia.titulo</h4></div>
+                            <div class="pnl-body">
+                                <img src="~/Content/Resources/Images/news-1.jpg" class="img-responsive" style="max-width: 100%;" alt="Image">
+                            </div>
+                            <div class="pnl-footer" style="text-align:center;">
+                                <h4>@noticia.subtitulo</h4>
+                                @Html.ActionLink("Ver acta completa", "PDF_Actas", new { IdNoticias = noticia.id_Noticias })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div>
+            <a href="/Usuario/Usuarios/">Volver</a>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-5 col-sm-4">
+            <img src="~/Content/Resources/Images/logo_Login.png" style="max-width:40%;" class="img-responsive" alt="logo">
+            <p>
+                Sindicato de Ingenieros y Profesionales del ICE, RACSA y CNFL.
+            </p>
+            <p><i class="fa fa-phone"></i> +506 2290-8801 / 2290-8802</p>
+            <p><i class="fa fa-envelope-o"></i> siice@ice.go.cr</p>
+            <p>
+                <i class="fa fa-globe"></i> Sabana Sur, del Restaurante
+                Mc Donald’s 100m Este y 50m Sur
+            </p>
+        </div>
+
+        @*<div class="col-md-3 col-sm-4">
+                <h3>Useful Links</h3>
+                <p><a href="#">HTML5 Templates</a></p>
+                <p><a href="#">CSS3 Tricks</a></p>
+                <p><a href="#">Design Blog</a></p>
+                <p><a href="#">Animations</a></p>
+            </div>
+
+            <div class="col-md-4 col-sm-4 newsletter">
+                <h3>Newsletter</h3>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismo.</p>
+                <div class="input-group">
+                    <form action="#" method="post">
+                        <input name="email" type="email" placeholder="Enter your email" class="form-control" autorequired>
+                        <button type="submit" name="submit" class="btn email">Submit</button>
+                    </form>
+                </div>
+            </div>*@
+    </div>
+</div>
+
+<style>
+    .pnl-heading {
+        color: #2456c1 !important;
+        background-color: #ffffff !important;
+        padding: 2px 2px 2px;
+        border-bottom: 1px solid transparent;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        overflow: hidden;
+        height: 100px;
+    }
+
+    .pnl {
+        border: 1px solid #e4e4e4;
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+        padding: 20px;
+        font-family: sans-serif;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        height: 400px;
+    }
+
+        .pnl:hover {
+            box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        }
+
+    .pnl-body {
+        padding: 0px;
+        overflow: hidden;
+    }
+
+    .pnl-footer .btn:hover {
+        border: 1px solid #EEA30E;
+        background-color: #fff !important;
+        color: #EEA30E;
+    }
+
+
+    .pnl-footer {
+        background-color: white !important;
+        padding: 10px;
+    }
+
+        .pnl-footer h3 {
+            font-size: 32px;
+        }
+
+        .pnl-footer h4 {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .pnl-footer .btn {
+            margin: 15px 0;
+            background-color: #EEA30E;
+            color: #fff;
+        }
+
+    h4 {
+        font-size: 19px;
+        line-height: 1.375em;
+        color: #303030;
+        font-weight: 400;
+        margin-bottom: 15px;
+        overflow: hidden;
+    }
+</style>

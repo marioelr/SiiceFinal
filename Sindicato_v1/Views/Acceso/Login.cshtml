@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Login SIICE";
+}
+
+@if (ViewBag.Msg == "Agregado")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Confirmación",
+                text: "¡Se registró exitosamente! espere a que un administrador de SIICE acepte su solicitud de afiliación",
+                icon: "success"
+            });
+        }
+    </script>
+}
+
+@if (ViewBag.Msg == "Recuperado")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Aviso",
+                text: "Se envió le un correo electrónico con un enlace para recuperar la contraseña de su cuenta.",
+                icon: "info"
+            });
+        }
+    </script>
+}
+
+@if (ViewBag.Msg == "Error_Log")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Usuario no válido",
+                text: "El usuario o contraseña que ingresó no son válidos",
+                icon: "error"
+            });
+        }
+    </script>
+}
+
+<br />
+<br />
+<br />
+
+<head>
+    <link href="https://localhost:44378/Content/login-style.css" rel="stylesheet" />
+</head>
+
+<div style="text-align: center">
+    <h2>Inicio de sesión</h2>
+</div>
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper fadeInDown" id="errores">
+    <div id="formContent">
+
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img style="padding: 40px 0px 40px;" src="~/Content/Resources/Images/logo_Login.png" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- Login Form -->
+        <form action="@Url.Content("~/Acceso/Login")" method="post">
+            <input id="login-form" name="user" type="text" maxlength="12" class="fadeIn second validate[required, custom[onlyNumberSp]]" placeholder="Su nombre de usuario...">
+            <input id="login-form" name="contrasenia" type="password" class="fadeIn third validate[required]" placeholder="Su contraseña...">
+            <input type="submit" class="fadeIn fourth" value="Ingresar">
+        </form>
+
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <a class="underlineHover" href="https://localhost:44378/PasswordRecovery/StarRecovery">¿Olvidó su contraseña?</a>
+        </div>
+
+    </div>
+</div>
+

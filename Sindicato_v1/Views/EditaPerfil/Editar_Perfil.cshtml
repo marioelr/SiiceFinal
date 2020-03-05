@@ -1,0 +1,113 @@
+﻿@model Sindicato_v1.Models.ViewModels.EditPerfilViewModels
+@{
+    ViewBag.Title = "Editar Perfil";
+}
+
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+<br />
+<br />
+<br />
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/EditaPerfil/Editar_Perfil">Perfil</a></li>
+                <li><a href="~/Usuario/Actas">Actas</a></li>
+                <li><a href="~/Usuario/Noticias">Noticias</a></li>
+                <li><a href="">Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+                <li><a href="~/Usuario/close_session" onclick="return LeaveConfirm()"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="https://localhost:44378/#inicio">SIICE - Inicio</a></li>
+    <li><a href="/Usuario/Perfil/">Mi perfil</a></li>
+    <li>Editar perfil</li>
+</ul>
+
+<h2>Editar perfil</h2>
+
+<hr class="hr-custom" />
+
+@using (Html.BeginForm("Editar_Perfil", "EditaPerfil", FormMethod.Post))
+{
+    <h4>Ingrese la nueva información sobre su perfil personal:</h4>
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            <div class="column">
+                @Html.HiddenFor(p => p.id)
+                <div>
+                    @Html.LabelFor(a => a.nombre)
+                    @Html.TextBoxFor(a => a.nombre, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]", placeholder="Su nombre completo" })
+                    @Html.ValidationMessageFor(a => a.nombre, null, new { @class = "text-danger" })
+                </div>
+                <br />
+                <div>
+                    @Html.LabelFor(a => a.p_apellido)
+                    @Html.TextBoxFor(a => a.p_apellido, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]", placeholder="Su primer apellido" })
+                    @Html.ValidationMessageFor(a => a.p_apellido, null, new { @class = "text-danger" })
+                </div>
+                <br />
+                <div>
+                    @Html.LabelFor(a => a.s_apellido)
+                    @Html.TextBoxFor(a => a.s_apellido, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]", placeholder="Su segundo apellido" })
+                    @Html.ValidationMessageFor(a => a.s_apellido, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="column">
+                <div>
+                    @Html.LabelFor(a => a.telefono)
+                    @Html.TextBoxFor(a => a.telefono, "", new { @class = "form-control validate[required, minSize[8], maxSize[8], custom[onlyNumberSp]]", placeholder="Su teléfono" })
+                    @Html.ValidationMessageFor(a => a.telefono, null, new { @class = "text-danger" })
+                </div>
+                <br />
+                <div>
+                    @Html.LabelFor(a => a.direccion)
+                    @Html.EditorFor(a => a.direccion, "", new { htmlAttributes = new { @class = "form-control validate[required]", placeholder="Su dirección exacta" } })
+                    @Html.ValidationMessageFor(a => a.direccion, null, new { @class = "text-danger" })
+                </div>
+                <br />
+                <div>
+                    @Html.LabelFor(a => a.correo_Electronico)
+                    @Html.EditorFor(a => a.correo_Electronico, "", new { htmlAttributes = new { @class = "form-control validate[required, custom[email]]", placeholder="Formato: correoelectronico@ejemplo.com" } })
+                    @Html.ValidationMessageFor(a => a.correo_Electronico, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-custom1" type="submit" />
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>

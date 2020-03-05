@@ -1,0 +1,217 @@
+﻿
+@{
+    ViewBag.Title = "Agremiado";
+}
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @if (ViewBag.Msg == "Modificado")
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                swal({
+                    title: "Confirmación",
+                    text: "¡Se modificó exitosamente!",
+                    icon: "info"
+                });
+            }
+        </script>
+    }
+</head>
+
+<br />
+<br />
+<br />
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Usuario/Actas">Actas</a></li>
+                <li><a href="~/Usuario/Noticias">Noticias</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+                <li><a href="~/Usuario/close_session" onclick="return LeaveConfirm()"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+    <li>Mi perfil</li>
+</ul>
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-sm-3 well">
+            <div class="well">
+                <p><a href="~/EditaPerfil/Editar_Perfil">Mi perfil</a></p>
+                <img src="~/Content/Resources/Images/no-user-image.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+            </div>
+            <div class="well">
+                <p><a href="#">Intereses</a></p>
+                <p>
+                    <span class="label label-default">Noticias</span>
+                    <span class="label label-primary">Viajes</span>
+                    <span class="label label-success">ICE</span>
+                    <span class="label label-info">CNFL</span>
+                    <span class="label label-warning">RACSA</span>
+                    <span class="label label-danger">Actas</span>
+                </p>
+            </div>
+            <div class="alert alert-success fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                <p><strong>Ey!</strong></p>
+                ¿Que buscas?
+            </div>
+            <p><a href="https://mega.nz/#!ZAkBBSYJ!0sFnyrVW6i0d_06B3Nr9p2aiMm4-pknocv5Jcg4MAvc" target="_blank">40 aniversario</a></p>
+            <p><a href="https://mega.nz/#!xBEjQYBI!6b6kHEBgukqsKxpLTHlhuSEqzQ4_-S4CP3IJggXw-04" target="_blank">Acta constituyente</a></p>
+            <p>
+                <a href="https://mega.nz/#!NN1DzaSY!rF47Mv_hDoOHR3V7f_c5tUBPZaG3vBjsR6Z-wiZW23g" target="_blank">
+                    Ley general de telecomunicaciones
+                </a>
+            </p>
+            <hr />
+            <a href="~/Usuario/StarRecovery" class="btn btn-custom1">Solicitar cambio de contraseña</a>
+        </div>
+        <div class="col-sm-7">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default text-left">
+                        <div class="panel-body">
+                            <p contenteditable="true">Status: Feeling Blue</p>
+                            <button type="button" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-thumbs-up"></span> Like
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="comunicados" class="container-fluid text-center bg-grey">
+                <h2>Comunicados</h2><br>
+
+                <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+                    Indicators
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+
+                    Wrapper for slides
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <div class="well">
+                                <h4>Administración Superior: Fortalecimiento del ICE o doble discurso</h4>
+                                <p>Comunicado SIICE<a class="btn btn-secondary" href="#" role="button">Ver detalles»</a></p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="well">
+                                <h4>Administración Superior: Fortalecimiento del ICE o doble discurso</h4>
+                                <p>Comunicado SIICE<a class="btn btn-secondary" href="#" role="button">Ver detalles»</a></p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="well">
+                                <h4>Administración Superior: Fortalecimiento del ICE o doble discurso</h4>
+                                <p>Comunicado SIICE<a class="btn btn-secondary" href="#" role="button">Ver detalles»</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    Left and right controls
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="well">
+                        <p>Bo</p>
+                        <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="well">
+                        <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="well">
+                        <p>Jane</p>
+                        <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="well">
+                        <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="well">
+                        <p>Anja</p>
+                        <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="well">
+                        <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 well">
+            <div class="thumbnail">
+                <p>Siguientes eventos:</p>
+                <img src="paris.jpg" alt="Paris" width="400" height="300">
+                <p><strong>San José</strong></p>
+                <p>Jue. 27 Febrero 2020</p>
+                <button class="btn btn-primary">Info</button>
+            </div>
+            <div class="col-lg-12">
+                <h2><span class="glyphicon glyphicon-calendar"></span> Fecha y hora</h2>
+                <br />
+                <br />
+                <section class="col-lg-10">
+                    @Html.Partial("_AdministradorCalendarPartial")
+                </section>
+            </div>
+            <div class="well">
+                <p>X</p>
+            </div>
+            <div class="well">
+                <p>X</p>
+            </div>
+            <div class="well">
+                <p>X</p>
+            </div>
+            <div class="well">
+                <p>X</p>
+            </div>
+        </div>
+
+
+
+

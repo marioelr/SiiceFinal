@@ -1,0 +1,263 @@
+﻿@model Sindicato_v1.Models.ViewModels.AddAgremiadoViewModel
+
+@{
+    ViewBag.Title = "Afiliación";
+}
+
+@if (ViewBag.Msg == "Pass")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Error",
+                text: "¡Las contraseña ingresada y su confirmación no coinciden! \n Revíselas en intentelo de nuevo",
+                icon: "error"
+            });
+        }
+    </script>
+}
+
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br />
+<br />
+<br />
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+    </div>
+</nav>
+
+<div style="margin-bottom:0">
+    <img src="~/Content/Resources/Images/4.1.png" style="width:100%">
+</div>
+
+<div>
+    <h2 style="text-align: center;">Afiliese a SIICE</h2>
+</div>
+
+<hr class="hr-custom">
+
+<div class="col-sm-12">
+    <h4 style="text-align:justify;">
+        SIICE es una organización privada, sin fines de lucro, creada por ingenieros del Instituto
+        Costarricense de Electricidad (ICE).
+    </h4>
+    <h4 style="text-align:justify;">
+        Actualmente nuestro Sindicato agrupa ingenieros y profesionales que laboran para el <b>
+            ICE,
+            Radiográfica Costarricense S.A. (RACSA) y la Compañía Nacional de Fuerza y Luz (CNFL)
+        </b>, afiliese ahora y comience a gosar de los beneficios que le ofrecemos, solo complete el siguiente formulario...
+    </h4>
+</div>
+
+@using (Html.BeginForm("Registro", "Registro", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            <br />
+            <h3 style="text-align:center;">Información personal básica</h3>
+            <hr />
+            <div class="row">
+                <div class="column">
+                    <div>
+                        @Html.LabelFor(e => e.cedula)
+                        @Html.TextBoxFor(e => e.cedula, "", new { @class = "form-control validate[required,custom[onlyNumberSp]]", placeholder = "Formato: 123456789" })
+                        @Html.ValidationMessageFor(e => e.cedula, null, new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div>
+                        @Html.LabelFor(e => e.nombre)
+                        @Html.TextBoxFor(e => e.nombre, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]", placeholder = "Su nombre completo" })
+                        @Html.ValidationMessageFor(e => e.nombre, null, new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div>
+                        @Html.LabelFor(e => e.primer_apellido)
+                        @Html.TextBoxFor(e => e.primer_apellido, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]", placeholder = "Su primer apellido" })
+                        @Html.ValidationMessageFor(e => e.primer_apellido, null, new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div>
+                        @Html.LabelFor(e => e.segundo_apellido)
+                        @Html.TextBoxFor(e => e.segundo_apellido, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]", placeholder = "Su segundo apellido" })
+                        @Html.ValidationMessageFor(e => e.nombre, null, new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div>
+                        @Html.LabelFor(e => e.Genero)
+                        @Html.DropDownList("genero", new List<SelectListItem>
+                        {
+                            new SelectListItem{ Text = "Femenino"},
+                            new SelectListItem{ Text = "Masculino"}
+                        }, "Seleccione género", new { @class = "form-control validate[required]" })
+                        @Html.ValidationMessageFor(e => e.Genero, null, new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div>
+                        @Html.LabelFor(e => e.correo_Electronico)
+                        @Html.TextBoxFor(e => e.correo_Electronico, "", new { @class = "form-control validate[required, custom[email]]", placeholder = "Formato: correoelectronico@ejemplo.com" })
+                        @Html.ValidationMessageFor(e => e.correo_Electronico, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="column">
+                    <div>
+                        @Html.LabelFor(e => e.nacionalidad)
+                        @Html.DropDownListFor(e => e.nacionalidad, ViewBag.Country as SelectList, "Seleccione país", new { @class = "form-control validate[required]" })
+                        @Html.ValidationMessageFor(d => d.nacionalidad, null, new { @class = "text-danger " })
+                    </div>
+                    <br />
+                    <div>
+                        @Html.LabelFor(d => d.id_ECivil)
+                        @Html.DropDownListFor(d => d.id_ECivil, ViewBag.EstadoCivilList as SelectList, "Seleccione estado civil", new { @class = "form-control validate[required]" })
+                        @Html.ValidationMessageFor(d => d.id_ECivil, null, new { @class = "text-danger " })
+                    </div>
+                    <br />
+                    <div>
+                        @Html.LabelFor(e => e.fecha_Nac)
+                        <br />
+                        @Html.EditorFor(model => model.fecha_Nac, new { htmlAttributes = new { @class = "form-control validate[required]" } })
+                        @Html.ValidationMessageFor(model => model.fecha_Nac, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div>
+                        @Html.LabelFor(e => e.Telefono)
+                        @Html.TextBoxFor(e => e.Telefono, "", new { @class = "form-control validate[required, maxSize[8],custom[onlyNumberSp] ]", placeholder = "Formato: 88888888" })
+                        @Html.ValidationMessageFor(e => e.Telefono, null, new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div>
+                        @Html.LabelFor(e => e.Direccion)
+                        @Html.TextBoxFor(e => e.Direccion, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]", placeholder = "Su dirección completa y detallada" })
+                        @Html.ValidationMessageFor(e => e.Direccion, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <h3 style="text-align:center;">Información de usuario</h3>
+            <hr />
+            <div class="row">
+                <div class="column">
+                    <div>
+                        @Html.LabelFor(e => e.contrasenia)
+                        @Html.TextBoxFor(e => e.contrasenia, "", new { @class = "form-control  validate[required]", @type = "password", placeholder = "Ingrese una contraseña segura" })
+                        @Html.ValidationMessageFor(e => e.contrasenia, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="column">
+                    <div>
+                        @Html.LabelFor(e => e.conf_contrasenia)
+                        @Html.TextBoxFor(e => e.conf_contrasenia, "", new { @class = "form-control  validate[required]", @type = "password", placeholder = "Confirme su contraseña" })
+                        @Html.ValidationMessageFor(e => e.conf_contrasenia, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <h3 style="text-align:center;">Información del empleado</h3>
+            <hr />
+            <div class="row">
+                <div class="column">
+                    <div>
+                        @Html.LabelFor(d => d.id_Departamento)
+                        @Html.DropDownListFor(d => d.id_Departamento, ViewBag.DepList as SelectList, "Seleccione departamento", new { @class = "form-control validate[required]", placeholder = "Nombre del departamento en el que labora" })
+                        @Html.ValidationMessageFor(d => d.id_Departamento, null, new { @class = "text-danger " })
+                    </div>
+                    <br />
+                    <div>
+                        @Html.LabelFor(e => e.profesion)
+                        @Html.TextBoxFor(e => e.profesion, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]", placeholder = "Su profesión" })
+                        @Html.ValidationMessageFor(e => e.profesion, null, new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div>
+                        @Html.LabelFor(e => e.colegio_Pro)
+                        @Html.TextBoxFor(e => e.colegio_Pro, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]", placeholder = "Nombre del colegio profesional al que pertenece" })
+                        @Html.ValidationMessageFor(e => e.colegio_Pro, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="column">
+                    <div>
+                        @Html.LabelFor(e => e.puesto)
+                        @Html.TextBoxFor(e => e.puesto, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]", placeholder = "Puesto en el que labora" })
+                        @Html.ValidationMessageFor(e => e.puesto, null, new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div>
+                        @Html.LabelFor(e => e.g_Academico)
+                        @Html.DropDownList("g_Academico", new List<SelectListItem>
+                        {
+                            new SelectListItem{ Text = "Primaria"},
+                            new SelectListItem{ Text = "Secundaria"},
+                            new SelectListItem{ Text = "Superior"}
+                        }, "Seleccione grado académico", new { @class = "form-control validate[required]" })
+                        @Html.ValidationMessageFor(e => e.g_Academico, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-custom1" type="submit" />
+            </div>
+
+        </div>
+    </div>
+}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+
+<script type="text/javascript">
+        //$('#conf_contrasenia').change(function () {
+
+        //    var pass = moment($('#contrasenia').val());
+        //    var conf_pass = moment($('#conf_contrasenia').val());
+
+        //    if (pass != conf_pass) {
+        //        swal("¡Atención!", "La fecha de inicio no puede ser mayor la fecha de fin");
+        //        $('#conf_contrasenia').val(null);
+        //    }
+
+        //});
+    </script>
+
+<script type="text/javascript">
+    $('#fecha_Nac').change(function () {
+
+        var date1 = moment($('#fecha_Nac').val());
+
+        var today = Date.now();
+
+        if (date1 > today) {
+            swal("¡Atención!", "La fecha de nacimiento no puede ser una fecha futura.");
+            $('#fecha_Nac').val(null);
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+

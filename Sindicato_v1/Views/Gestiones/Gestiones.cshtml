@@ -1,0 +1,142 @@
+﻿@model List<Sindicato_v1.Models.ViewModels.GestionesViewModel>
+
+@{
+    ViewBag.Title = "Gestiones";
+}
+
+@if (ViewBag.Msg == "Agregado")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Confirmación",
+                text: "¡Se agregó exitosamente!",
+                icon: "success"
+            });
+        }
+    </script>
+}
+
+@if (ViewBag.Msg == "Modificado")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Confirmación",
+                text: "¡Se modificó exitosamente!",
+                icon: "info"
+            });
+        }
+    </script>
+}
+
+@if (ViewBag.Msg == "Eliminado")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Confirmación",
+                text: "¡Se eliminó exitosamente!",
+                icon: "warning"
+            });
+        }
+    </script>
+}
+
+@if (ViewBag.Msg == "Error")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "ERROR",
+                text: "¡Este elemento no se puede eliminar porque está siendo utilizado!",
+                icon: "error"
+            });
+        }
+    </script>
+}
+
+<script type="text/javascript">
+    function DeleteConfirm() {
+        if (confirm("¿Eliminar este registro?"))
+            return true;
+        else
+            return false;
+    }
+</script>
+
+<br />
+<br />
+<br />
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="~/Usuario/Documentos">Documentos</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+                <li><a href="~/Usuario/close_session" onclick="return LeaveConfirm()"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="https://localhost:44378/#inicio">SIICE - Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Gestiones de empleados</li>
+</ul>
+
+<div>
+    <h2>Gestiones de empleados</h2>
+    <h4>Lista de los empleados que laboran en el sindicato</h4>
+</div>
+
+<hr class="hr-custom"/>
+
+<div class="row">
+    <div class="table-responsive col-lg-12">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Primer apellido</th>
+                    <th>Segundo apellido</th>
+                    <th>Departamento</th>
+                    <th>Agregar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj_Emp in Model)
+                {
+                    <tr>
+                        <th>@obj_Emp.id_Emp</th>
+                        <td>@obj_Emp.nombre_emp</td>
+                        <td>@obj_Emp.apellido1</td>
+                        <td>@obj_Emp.apellido2 </td>
+                        <td>@obj_Emp.departamento</td>
+                        <td>
+                            <a class="btn btn-default" href="/Gestiones/Nueva_Gestion/@obj_Emp.id_Emp" style="width:150px; height:35px">Nueva Gestión</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="~/Gestiones/Editar_Gestiones" type="button" class="btn btn-custom1 btn-lg btn-block">Control de Gestiones</a>
+        <hr />
+        <div>
+            <a href="/Usuario/Administrador/">Volver</a>
+        </div>
+    </div>
+</div>

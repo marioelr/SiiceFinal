@@ -1,0 +1,1204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SII_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_Acta">
+          <Key>
+            <PropertyRef Name="id_Acta" />
+          </Key>
+          <Property Name="id_Acta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_Acta" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha_Cre" Type="date" Nullable="false" />
+          <Property Name="ubicacion" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Acta_Usuario">
+          <Key>
+            <PropertyRef Name="id_A_U" />
+          </Key>
+          <Property Name="id_A_U" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Acta" Type="int" Nullable="false" />
+          <Property Name="id_Usuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_ActasPDF">
+          <Key>
+            <PropertyRef Name="id_Acta" />
+          </Key>
+          <Property Name="id_Acta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_Creacion_A" Type="datetime" Nullable="false" />
+          <Property Name="titulo_Acta" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="subtitulo_Acta" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="contenido_Acta" Type="varchar(max)" Nullable="false" />
+          <Property Name="estado" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_Agremiado">
+          <Key>
+            <PropertyRef Name="id_Agremiado" />
+          </Key>
+          <Property Name="id_Agremiado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Usuario" Type="int" Nullable="false" />
+          <Property Name="profesion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="colegio_Profesional" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="puesto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="afiliado" Type="int" Nullable="false" />
+          <Property Name="grado_Academico" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_LugarTrabajo" Type="int" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SII_DB.dbo.Tbl_Bit_Ingreso' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Tbl_Bit_Ingreso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario" Type="bigint" />
+          <Property Name="hora" Type="datetime" />
+          <Property Name="rol" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_Compania">
+          <Key>
+            <PropertyRef Name="id_Compania" />
+          </Key>
+          <Property Name="id_Compania" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="razon_Social" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="cedula_Juridica" Type="int" Nullable="false" />
+          <Property Name="nom_Compania" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="telefono" Type="int" Nullable="false" />
+          <Property Name="correo_Electronico" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Deduccion">
+          <Key>
+            <PropertyRef Name="id_Deduccion" />
+          </Key>
+          <Property Name="id_Deduccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_Deduccion" Type="date" Nullable="false" />
+          <Property Name="monto" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="id_Agremiado" Type="int" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Departamento">
+          <Key>
+            <PropertyRef Name="id_Departamento" />
+          </Key>
+          <Property Name="id_Departamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="departamento" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="id_Compania" Type="int" Nullable="false" />
+          <Property Name="ubicacion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Empleado">
+          <Key>
+            <PropertyRef Name="id_Empleado" />
+          </Key>
+          <Property Name="id_Empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cargo" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="superior_Inmediato" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="id_LugarTrabajo" Type="int" Nullable="false" />
+          <Property Name="id_Usuario" Type="int" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+          <Property Name="total_Vacaciones" Type="int" />
+          <Property Name="cant_AusenciasJustificadas" Type="int" />
+          <Property Name="cant_AusenciasInjustificadas" Type="int" />
+          <Property Name="vac_Utilizadas" Type="int" />
+          <Property Name="vac_Restantes" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_EstadoCivil">
+          <Key>
+            <PropertyRef Name="id_ECivil" />
+          </Key>
+          <Property Name="id_ECivil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estado_Civil" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Gestion">
+          <Key>
+            <PropertyRef Name="id_Gestion" />
+          </Key>
+          <Property Name="id_Gestion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="motivo" Type="varchar" MaxLength="150" />
+          <Property Name="fecha_Inicio" Type="date" />
+          <Property Name="fecha_Fin" Type="date" />
+          <Property Name="id_Empleado" Type="int" Nullable="false" />
+          <Property Name="id_TipoGestion" Type="int" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+          <Property Name="fecha_Ausencia" Type="date" />
+        </EntityType>
+        <EntityType Name="Tbl_NoticiasPDF">
+          <Key>
+            <PropertyRef Name="id_Noticia" />
+          </Key>
+          <Property Name="id_Noticia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_Creacion_N" Type="datetime" Nullable="false" />
+          <Property Name="titulo_Noticia" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="subtitulo_Noticia" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="contenido_Noticia" Type="varchar(max)" Nullable="false" />
+          <Property Name="estado" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_Pais">
+          <Key>
+            <PropertyRef Name="id_Pais" />
+          </Key>
+          <Property Name="id_Pais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="country_code" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="country_name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Persona">
+          <Key>
+            <PropertyRef Name="id_Persona" />
+          </Key>
+          <Property Name="id_Persona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula" Type="bigint" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="primer_Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="segundo_Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="genero" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nacionalidad" Type="int" Nullable="false" />
+          <Property Name="id_ECivil" Type="int" Nullable="false" />
+          <Property Name="fecha_Nac" Type="date" Nullable="false" />
+          <Property Name="fecha_Reg" Type="date" Nullable="false" />
+          <Property Name="telefono" Type="int" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="correo_Electronico" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Rol">
+          <Key>
+            <PropertyRef Name="id_Rol" />
+          </Key>
+          <Property Name="id_Rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_Rol" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_TipoGestion">
+          <Key>
+            <PropertyRef Name="id_TipoGestion" />
+          </Key>
+          <Property Name="id_TipoGestion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_Gestion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_TipoUsuario">
+          <Key>
+            <PropertyRef Name="id_TipoUsu" />
+          </Key>
+          <Property Name="id_TipoUsu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Usuario">
+          <Key>
+            <PropertyRef Name="id_Usuario" />
+          </Key>
+          <Property Name="id_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Persona" Type="int" Nullable="false" />
+          <Property Name="contrasenia" Type="varchar" MaxLength="1000" />
+          <Property Name="id_Rol" Type="int" Nullable="false" />
+          <Property Name="id_TipoUsu" Type="int" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+          <Property Name="token_recovery" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="t_acta0_fk">
+          <End Role="Tbl_Acta" Type="Self.Tbl_Acta" Multiplicity="1" />
+          <End Role="Tbl_Acta_Usuario" Type="Self.Tbl_Acta_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Acta">
+              <PropertyRef Name="id_Acta" />
+            </Principal>
+            <Dependent Role="Tbl_Acta_Usuario">
+              <PropertyRef Name="id_Acta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_agremiado0_fk">
+          <End Role="Tbl_Agremiado" Type="Self.Tbl_Agremiado" Multiplicity="1" />
+          <End Role="Tbl_Deduccion" Type="Self.Tbl_Deduccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Agremiado">
+              <PropertyRef Name="id_Agremiado" />
+            </Principal>
+            <Dependent Role="Tbl_Deduccion">
+              <PropertyRef Name="id_Agremiado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_compania_fk">
+          <End Role="Tbl_Compania" Type="Self.Tbl_Compania" Multiplicity="1" />
+          <End Role="Tbl_Departamento" Type="Self.Tbl_Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Compania">
+              <PropertyRef Name="id_Compania" />
+            </Principal>
+            <Dependent Role="Tbl_Departamento">
+              <PropertyRef Name="id_Compania" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_ecivil_fk">
+          <End Role="Tbl_EstadoCivil" Type="Self.Tbl_EstadoCivil" Multiplicity="1" />
+          <End Role="Tbl_Persona" Type="Self.Tbl_Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_EstadoCivil">
+              <PropertyRef Name="id_ECivil" />
+            </Principal>
+            <Dependent Role="Tbl_Persona">
+              <PropertyRef Name="id_ECivil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_empleado_fk">
+          <End Role="Tbl_Empleado" Type="Self.Tbl_Empleado" Multiplicity="1" />
+          <End Role="Tbl_Gestion" Type="Self.Tbl_Gestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Empleado">
+              <PropertyRef Name="id_Empleado" />
+            </Principal>
+            <Dependent Role="Tbl_Gestion">
+              <PropertyRef Name="id_Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_ltrabajo0_fk">
+          <End Role="Tbl_Departamento" Type="Self.Tbl_Departamento" Multiplicity="1" />
+          <End Role="Tbl_Agremiado" Type="Self.Tbl_Agremiado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Departamento">
+              <PropertyRef Name="id_Departamento" />
+            </Principal>
+            <Dependent Role="Tbl_Agremiado">
+              <PropertyRef Name="id_LugarTrabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_ltrabajo1_fk">
+          <End Role="Tbl_Departamento" Type="Self.Tbl_Departamento" Multiplicity="1" />
+          <End Role="Tbl_Empleado" Type="Self.Tbl_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Departamento">
+              <PropertyRef Name="id_Departamento" />
+            </Principal>
+            <Dependent Role="Tbl_Empleado">
+              <PropertyRef Name="id_LugarTrabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_persona_fk">
+          <End Role="Tbl_Persona" Type="Self.Tbl_Persona" Multiplicity="1" />
+          <End Role="Tbl_Usuario" Type="Self.Tbl_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Persona">
+              <PropertyRef Name="id_Persona" />
+            </Principal>
+            <Dependent Role="Tbl_Usuario">
+              <PropertyRef Name="id_Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_rol_fk">
+          <End Role="Tbl_Rol" Type="Self.Tbl_Rol" Multiplicity="1" />
+          <End Role="Tbl_Usuario" Type="Self.Tbl_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Rol">
+              <PropertyRef Name="id_Rol" />
+            </Principal>
+            <Dependent Role="Tbl_Usuario">
+              <PropertyRef Name="id_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_tgestion_fk">
+          <End Role="Tbl_TipoGestion" Type="Self.Tbl_TipoGestion" Multiplicity="1" />
+          <End Role="Tbl_Gestion" Type="Self.Tbl_Gestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_TipoGestion">
+              <PropertyRef Name="id_TipoGestion" />
+            </Principal>
+            <Dependent Role="Tbl_Gestion">
+              <PropertyRef Name="id_TipoGestion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_tipousu_fk">
+          <End Role="Tbl_TipoUsuario" Type="Self.Tbl_TipoUsuario" Multiplicity="1" />
+          <End Role="Tbl_Usuario" Type="Self.Tbl_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_TipoUsuario">
+              <PropertyRef Name="id_TipoUsu" />
+            </Principal>
+            <Dependent Role="Tbl_Usuario">
+              <PropertyRef Name="id_TipoUsu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_usuario0_fk">
+          <End Role="Tbl_Usuario" Type="Self.Tbl_Usuario" Multiplicity="1" />
+          <End Role="Tbl_Agremiado" Type="Self.Tbl_Agremiado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Usuario">
+              <PropertyRef Name="id_Usuario" />
+            </Principal>
+            <Dependent Role="Tbl_Agremiado">
+              <PropertyRef Name="id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_usuario1_fk">
+          <End Role="Tbl_Usuario" Type="Self.Tbl_Usuario" Multiplicity="1" />
+          <End Role="Tbl_Empleado" Type="Self.Tbl_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Usuario">
+              <PropertyRef Name="id_Usuario" />
+            </Principal>
+            <Dependent Role="Tbl_Empleado">
+              <PropertyRef Name="id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_usuario2_fk">
+          <End Role="Tbl_Usuario" Type="Self.Tbl_Usuario" Multiplicity="1" />
+          <End Role="Tbl_Acta_Usuario" Type="Self.Tbl_Acta_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Usuario">
+              <PropertyRef Name="id_Usuario" />
+            </Principal>
+            <Dependent Role="Tbl_Acta_Usuario">
+              <PropertyRef Name="id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SII_DBModelStoreContainer">
+          <EntitySet Name="Tbl_Acta" EntityType="Self.Tbl_Acta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Acta_Usuario" EntityType="Self.Tbl_Acta_Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_ActasPDF" EntityType="Self.Tbl_ActasPDF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Agremiado" EntityType="Self.Tbl_Agremiado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Compania" EntityType="Self.Tbl_Compania" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Deduccion" EntityType="Self.Tbl_Deduccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Departamento" EntityType="Self.Tbl_Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Empleado" EntityType="Self.Tbl_Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_EstadoCivil" EntityType="Self.Tbl_EstadoCivil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Gestion" EntityType="Self.Tbl_Gestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_NoticiasPDF" EntityType="Self.Tbl_NoticiasPDF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Pais" EntityType="Self.Tbl_Pais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Persona" EntityType="Self.Tbl_Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Rol" EntityType="Self.Tbl_Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_TipoGestion" EntityType="Self.Tbl_TipoGestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_TipoUsuario" EntityType="Self.Tbl_TipoUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Usuario" EntityType="Self.Tbl_Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Bit_Ingreso" EntityType="Self.Tbl_Bit_Ingreso" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Tbl_Bit_Ingreso].[id] AS [id], 
+    [Tbl_Bit_Ingreso].[usuario] AS [usuario], 
+    [Tbl_Bit_Ingreso].[hora] AS [hora], 
+    [Tbl_Bit_Ingreso].[rol] AS [rol]
+    FROM [dbo].[Tbl_Bit_Ingreso] AS [Tbl_Bit_Ingreso]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="t_acta0_fk" Association="Self.t_acta0_fk">
+            <End Role="Tbl_Acta" EntitySet="Tbl_Acta" />
+            <End Role="Tbl_Acta_Usuario" EntitySet="Tbl_Acta_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="t_agremiado0_fk" Association="Self.t_agremiado0_fk">
+            <End Role="Tbl_Agremiado" EntitySet="Tbl_Agremiado" />
+            <End Role="Tbl_Deduccion" EntitySet="Tbl_Deduccion" />
+          </AssociationSet>
+          <AssociationSet Name="t_compania_fk" Association="Self.t_compania_fk">
+            <End Role="Tbl_Compania" EntitySet="Tbl_Compania" />
+            <End Role="Tbl_Departamento" EntitySet="Tbl_Departamento" />
+          </AssociationSet>
+          <AssociationSet Name="t_ecivil_fk" Association="Self.t_ecivil_fk">
+            <End Role="Tbl_EstadoCivil" EntitySet="Tbl_EstadoCivil" />
+            <End Role="Tbl_Persona" EntitySet="Tbl_Persona" />
+          </AssociationSet>
+          <AssociationSet Name="t_empleado_fk" Association="Self.t_empleado_fk">
+            <End Role="Tbl_Empleado" EntitySet="Tbl_Empleado" />
+            <End Role="Tbl_Gestion" EntitySet="Tbl_Gestion" />
+          </AssociationSet>
+          <AssociationSet Name="t_ltrabajo0_fk" Association="Self.t_ltrabajo0_fk">
+            <End Role="Tbl_Departamento" EntitySet="Tbl_Departamento" />
+            <End Role="Tbl_Agremiado" EntitySet="Tbl_Agremiado" />
+          </AssociationSet>
+          <AssociationSet Name="t_ltrabajo1_fk" Association="Self.t_ltrabajo1_fk">
+            <End Role="Tbl_Departamento" EntitySet="Tbl_Departamento" />
+            <End Role="Tbl_Empleado" EntitySet="Tbl_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="t_persona_fk" Association="Self.t_persona_fk">
+            <End Role="Tbl_Persona" EntitySet="Tbl_Persona" />
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="t_rol_fk" Association="Self.t_rol_fk">
+            <End Role="Tbl_Rol" EntitySet="Tbl_Rol" />
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="t_tgestion_fk" Association="Self.t_tgestion_fk">
+            <End Role="Tbl_TipoGestion" EntitySet="Tbl_TipoGestion" />
+            <End Role="Tbl_Gestion" EntitySet="Tbl_Gestion" />
+          </AssociationSet>
+          <AssociationSet Name="t_tipousu_fk" Association="Self.t_tipousu_fk">
+            <End Role="Tbl_TipoUsuario" EntitySet="Tbl_TipoUsuario" />
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="t_usuario0_fk" Association="Self.t_usuario0_fk">
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+            <End Role="Tbl_Agremiado" EntitySet="Tbl_Agremiado" />
+          </AssociationSet>
+          <AssociationSet Name="t_usuario1_fk" Association="Self.t_usuario1_fk">
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+            <End Role="Tbl_Empleado" EntitySet="Tbl_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="t_usuario2_fk" Association="Self.t_usuario2_fk">
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+            <End Role="Tbl_Acta_Usuario" EntitySet="Tbl_Acta_Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SII_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SII_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_Acta" EntityType="SII_DBModel.Tbl_Acta" />
+          <EntitySet Name="Tbl_Acta_Usuario" EntityType="SII_DBModel.Tbl_Acta_Usuario" />
+          <EntitySet Name="Tbl_Agremiado" EntityType="SII_DBModel.Tbl_Agremiado" />
+          <EntitySet Name="Tbl_Compania" EntityType="SII_DBModel.Tbl_Compania" />
+          <EntitySet Name="Tbl_Deduccion" EntityType="SII_DBModel.Tbl_Deduccion" />
+          <EntitySet Name="Tbl_Departamento" EntityType="SII_DBModel.Tbl_Departamento" />
+          <EntitySet Name="Tbl_Empleado" EntityType="SII_DBModel.Tbl_Empleado" />
+          <EntitySet Name="Tbl_EstadoCivil" EntityType="SII_DBModel.Tbl_EstadoCivil" />
+          <EntitySet Name="Tbl_Gestion" EntityType="SII_DBModel.Tbl_Gestion" />
+          <EntitySet Name="Tbl_Persona" EntityType="SII_DBModel.Tbl_Persona" />
+          <EntitySet Name="Tbl_Rol" EntityType="SII_DBModel.Tbl_Rol" />
+          <EntitySet Name="Tbl_TipoGestion" EntityType="SII_DBModel.Tbl_TipoGestion" />
+          <EntitySet Name="Tbl_TipoUsuario" EntityType="SII_DBModel.Tbl_TipoUsuario" />
+          <EntitySet Name="Tbl_Usuario" EntityType="SII_DBModel.Tbl_Usuario" />
+          <AssociationSet Name="t_acta0_fk" Association="SII_DBModel.t_acta0_fk">
+            <End Role="Tbl_Acta" EntitySet="Tbl_Acta" />
+            <End Role="Tbl_Acta_Usuario" EntitySet="Tbl_Acta_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="t_usuario2_fk" Association="SII_DBModel.t_usuario2_fk">
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+            <End Role="Tbl_Acta_Usuario" EntitySet="Tbl_Acta_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="t_agremiado0_fk" Association="SII_DBModel.t_agremiado0_fk">
+            <End Role="Tbl_Agremiado" EntitySet="Tbl_Agremiado" />
+            <End Role="Tbl_Deduccion" EntitySet="Tbl_Deduccion" />
+          </AssociationSet>
+          <AssociationSet Name="t_ltrabajo0_fk" Association="SII_DBModel.t_ltrabajo0_fk">
+            <End Role="Tbl_Departamento" EntitySet="Tbl_Departamento" />
+            <End Role="Tbl_Agremiado" EntitySet="Tbl_Agremiado" />
+          </AssociationSet>
+          <AssociationSet Name="t_usuario0_fk" Association="SII_DBModel.t_usuario0_fk">
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+            <End Role="Tbl_Agremiado" EntitySet="Tbl_Agremiado" />
+          </AssociationSet>
+          <AssociationSet Name="t_compania_fk" Association="SII_DBModel.t_compania_fk">
+            <End Role="Tbl_Compania" EntitySet="Tbl_Compania" />
+            <End Role="Tbl_Departamento" EntitySet="Tbl_Departamento" />
+          </AssociationSet>
+          <AssociationSet Name="t_ltrabajo1_fk" Association="SII_DBModel.t_ltrabajo1_fk">
+            <End Role="Tbl_Departamento" EntitySet="Tbl_Departamento" />
+            <End Role="Tbl_Empleado" EntitySet="Tbl_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="t_empleado_fk" Association="SII_DBModel.t_empleado_fk">
+            <End Role="Tbl_Empleado" EntitySet="Tbl_Empleado" />
+            <End Role="Tbl_Gestion" EntitySet="Tbl_Gestion" />
+          </AssociationSet>
+          <AssociationSet Name="t_usuario1_fk" Association="SII_DBModel.t_usuario1_fk">
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+            <End Role="Tbl_Empleado" EntitySet="Tbl_Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="t_ecivil_fk" Association="SII_DBModel.t_ecivil_fk">
+            <End Role="Tbl_EstadoCivil" EntitySet="Tbl_EstadoCivil" />
+            <End Role="Tbl_Persona" EntitySet="Tbl_Persona" />
+          </AssociationSet>
+          <AssociationSet Name="t_tgestion_fk" Association="SII_DBModel.t_tgestion_fk">
+            <End Role="Tbl_TipoGestion" EntitySet="Tbl_TipoGestion" />
+            <End Role="Tbl_Gestion" EntitySet="Tbl_Gestion" />
+          </AssociationSet>
+          <AssociationSet Name="t_persona_fk" Association="SII_DBModel.t_persona_fk">
+            <End Role="Tbl_Persona" EntitySet="Tbl_Persona" />
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="t_rol_fk" Association="SII_DBModel.t_rol_fk">
+            <End Role="Tbl_Rol" EntitySet="Tbl_Rol" />
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="t_tipousu_fk" Association="SII_DBModel.t_tipousu_fk">
+            <End Role="Tbl_TipoUsuario" EntitySet="Tbl_TipoUsuario" />
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+          </AssociationSet>
+          <EntitySet Name="Tbl_Pais" EntityType="SII_DBModel.Tbl_Pais" />
+          <EntitySet Name="Tbl_Bit_Ingreso" EntityType="SII_DBModel.Tbl_Bit_Ingreso" />
+          <EntitySet Name="Tbl_ActasPDF" EntityType="SII_DBModel.Tbl_ActasPDF" />
+          <EntitySet Name="Tbl_NoticiasPDF" EntityType="SII_DBModel.Tbl_NoticiasPDF" />
+        </EntityContainer>
+        <EntityType Name="Tbl_Acta">
+          <Key>
+            <PropertyRef Name="id_Acta" />
+          </Key>
+          <Property Name="id_Acta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_Acta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_Cre" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ubicacion" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Acta_Usuario" Relationship="SII_DBModel.t_acta0_fk" FromRole="Tbl_Acta" ToRole="Tbl_Acta_Usuario" />
+        </EntityType>
+        <EntityType Name="Tbl_Acta_Usuario">
+          <Key>
+            <PropertyRef Name="id_A_U" />
+          </Key>
+          <Property Name="id_A_U" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Acta" Type="Int32" Nullable="false" />
+          <Property Name="id_Usuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Acta" Relationship="SII_DBModel.t_acta0_fk" FromRole="Tbl_Acta_Usuario" ToRole="Tbl_Acta" />
+          <NavigationProperty Name="Tbl_Usuario" Relationship="SII_DBModel.t_usuario2_fk" FromRole="Tbl_Acta_Usuario" ToRole="Tbl_Usuario" />
+        </EntityType>
+        <EntityType Name="Tbl_Agremiado">
+          <Key>
+            <PropertyRef Name="id_Agremiado" />
+          </Key>
+          <Property Name="id_Agremiado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="profesion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="colegio_Profesional" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="puesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="afiliado" Type="Int32" Nullable="false" />
+          <Property Name="grado_Academico" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_LugarTrabajo" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Deduccion" Relationship="SII_DBModel.t_agremiado0_fk" FromRole="Tbl_Agremiado" ToRole="Tbl_Deduccion" />
+          <NavigationProperty Name="Tbl_Departamento" Relationship="SII_DBModel.t_ltrabajo0_fk" FromRole="Tbl_Agremiado" ToRole="Tbl_Departamento" />
+          <NavigationProperty Name="Tbl_Usuario" Relationship="SII_DBModel.t_usuario0_fk" FromRole="Tbl_Agremiado" ToRole="Tbl_Usuario" />
+        </EntityType>
+        <EntityType Name="Tbl_Compania">
+          <Key>
+            <PropertyRef Name="id_Compania" />
+          </Key>
+          <Property Name="id_Compania" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="razon_Social" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cedula_Juridica" Type="Int32" Nullable="false" />
+          <Property Name="nom_Compania" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="Int32" Nullable="false" />
+          <Property Name="correo_Electronico" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Departamento" Relationship="SII_DBModel.t_compania_fk" FromRole="Tbl_Compania" ToRole="Tbl_Departamento" />
+        </EntityType>
+        <EntityType Name="Tbl_Deduccion">
+          <Key>
+            <PropertyRef Name="id_Deduccion" />
+          </Key>
+          <Property Name="id_Deduccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_Deduccion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="monto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="id_Agremiado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Agremiado" Relationship="SII_DBModel.t_agremiado0_fk" FromRole="Tbl_Deduccion" ToRole="Tbl_Agremiado" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Departamento">
+          <Key>
+            <PropertyRef Name="id_Departamento" />
+          </Key>
+          <Property Name="id_Departamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="departamento" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="id_Compania" Type="Int32" Nullable="false" />
+          <Property Name="ubicacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Agremiado" Relationship="SII_DBModel.t_ltrabajo0_fk" FromRole="Tbl_Departamento" ToRole="Tbl_Agremiado" />
+          <NavigationProperty Name="Tbl_Compania" Relationship="SII_DBModel.t_compania_fk" FromRole="Tbl_Departamento" ToRole="Tbl_Compania" />
+          <NavigationProperty Name="Tbl_Empleado" Relationship="SII_DBModel.t_ltrabajo1_fk" FromRole="Tbl_Departamento" ToRole="Tbl_Empleado" />
+        </EntityType>
+        <EntityType Name="Tbl_Empleado">
+          <Key>
+            <PropertyRef Name="id_Empleado" />
+          </Key>
+          <Property Name="id_Empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cargo" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="superior_Inmediato" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="id_LugarTrabajo" Type="Int32" Nullable="false" />
+          <Property Name="id_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="total_Vacaciones" Type="Int32" />
+          <Property Name="cant_AusenciasJustificadas" Type="Int32" />
+          <Property Name="cant_AusenciasInjustificadas" Type="Int32" />
+          <Property Name="vac_Utilizadas" Type="Int32" />
+          <Property Name="vac_Restantes" Type="Int32" />
+          <NavigationProperty Name="Tbl_Departamento" Relationship="SII_DBModel.t_ltrabajo1_fk" FromRole="Tbl_Empleado" ToRole="Tbl_Departamento" />
+          <NavigationProperty Name="Tbl_Gestion" Relationship="SII_DBModel.t_empleado_fk" FromRole="Tbl_Empleado" ToRole="Tbl_Gestion" />
+          <NavigationProperty Name="Tbl_Usuario" Relationship="SII_DBModel.t_usuario1_fk" FromRole="Tbl_Empleado" ToRole="Tbl_Usuario" />
+        </EntityType>
+        <EntityType Name="Tbl_EstadoCivil">
+          <Key>
+            <PropertyRef Name="id_ECivil" />
+          </Key>
+          <Property Name="id_ECivil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estado_Civil" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Persona" Relationship="SII_DBModel.t_ecivil_fk" FromRole="Tbl_EstadoCivil" ToRole="Tbl_Persona" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Gestion">
+          <Key>
+            <PropertyRef Name="id_Gestion" />
+          </Key>
+          <Property Name="id_Gestion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="motivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_Inicio" Type="DateTime" Precision="0" />
+          <Property Name="fecha_Fin" Type="DateTime" Precision="0" />
+          <Property Name="id_Empleado" Type="Int32" Nullable="false" />
+          <Property Name="id_TipoGestion" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="fecha_Ausencia" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Tbl_Empleado" Relationship="SII_DBModel.t_empleado_fk" FromRole="Tbl_Gestion" ToRole="Tbl_Empleado" />
+          <NavigationProperty Name="Tbl_TipoGestion" Relationship="SII_DBModel.t_tgestion_fk" FromRole="Tbl_Gestion" ToRole="Tbl_TipoGestion" />
+        </EntityType>
+        <EntityType Name="Tbl_Persona">
+          <Key>
+            <PropertyRef Name="id_Persona" />
+          </Key>
+          <Property Name="id_Persona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula" Type="Int64" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="primer_Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="segundo_Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="genero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nacionalidad" Type="Int32" Nullable="false" />
+          <Property Name="id_ECivil" Type="Int32" Nullable="false" />
+          <Property Name="fecha_Nac" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha_Reg" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="telefono" Type="Int32" Nullable="false" />
+          <Property Name="direccion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="correo_Electronico" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_EstadoCivil" Relationship="SII_DBModel.t_ecivil_fk" FromRole="Tbl_Persona" ToRole="Tbl_EstadoCivil" />
+          <NavigationProperty Name="Tbl_Usuario" Relationship="SII_DBModel.t_persona_fk" FromRole="Tbl_Persona" ToRole="Tbl_Usuario" />
+        </EntityType>
+        <EntityType Name="Tbl_Rol">
+          <Key>
+            <PropertyRef Name="id_Rol" />
+          </Key>
+          <Property Name="id_Rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_Rol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Usuario" Relationship="SII_DBModel.t_rol_fk" FromRole="Tbl_Rol" ToRole="Tbl_Usuario" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_TipoGestion">
+          <Key>
+            <PropertyRef Name="id_TipoGestion" />
+          </Key>
+          <Property Name="id_TipoGestion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_Gestion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Gestion" Relationship="SII_DBModel.t_tgestion_fk" FromRole="Tbl_TipoGestion" ToRole="Tbl_Gestion" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_TipoUsuario">
+          <Key>
+            <PropertyRef Name="id_TipoUsu" />
+          </Key>
+          <Property Name="id_TipoUsu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_Usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Usuario" Relationship="SII_DBModel.t_tipousu_fk" FromRole="Tbl_TipoUsuario" ToRole="Tbl_Usuario" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Usuario">
+          <Key>
+            <PropertyRef Name="id_Usuario" />
+          </Key>
+          <Property Name="id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Persona" Type="Int32" Nullable="false" />
+          <Property Name="contrasenia" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="id_Rol" Type="Int32" Nullable="false" />
+          <Property Name="id_TipoUsu" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Acta_Usuario" Relationship="SII_DBModel.t_usuario2_fk" FromRole="Tbl_Usuario" ToRole="Tbl_Acta_Usuario" />
+          <NavigationProperty Name="Tbl_Agremiado" Relationship="SII_DBModel.t_usuario0_fk" FromRole="Tbl_Usuario" ToRole="Tbl_Agremiado" />
+          <NavigationProperty Name="Tbl_Empleado" Relationship="SII_DBModel.t_usuario1_fk" FromRole="Tbl_Usuario" ToRole="Tbl_Empleado" />
+          <NavigationProperty Name="Tbl_Persona" Relationship="SII_DBModel.t_persona_fk" FromRole="Tbl_Usuario" ToRole="Tbl_Persona" />
+          <NavigationProperty Name="Tbl_Rol" Relationship="SII_DBModel.t_rol_fk" FromRole="Tbl_Usuario" ToRole="Tbl_Rol" />
+          <NavigationProperty Name="Tbl_TipoUsuario" Relationship="SII_DBModel.t_tipousu_fk" FromRole="Tbl_Usuario" ToRole="Tbl_TipoUsuario" />
+          <Property Name="token_recovery" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="t_acta0_fk">
+          <End Type="SII_DBModel.Tbl_Acta" Role="Tbl_Acta" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Acta_Usuario" Role="Tbl_Acta_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Acta">
+              <PropertyRef Name="id_Acta" />
+            </Principal>
+            <Dependent Role="Tbl_Acta_Usuario">
+              <PropertyRef Name="id_Acta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_usuario2_fk">
+          <End Type="SII_DBModel.Tbl_Usuario" Role="Tbl_Usuario" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Acta_Usuario" Role="Tbl_Acta_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Usuario">
+              <PropertyRef Name="id_Usuario" />
+            </Principal>
+            <Dependent Role="Tbl_Acta_Usuario">
+              <PropertyRef Name="id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_agremiado0_fk">
+          <End Type="SII_DBModel.Tbl_Agremiado" Role="Tbl_Agremiado" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Deduccion" Role="Tbl_Deduccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Agremiado">
+              <PropertyRef Name="id_Agremiado" />
+            </Principal>
+            <Dependent Role="Tbl_Deduccion">
+              <PropertyRef Name="id_Agremiado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_ltrabajo0_fk">
+          <End Type="SII_DBModel.Tbl_Departamento" Role="Tbl_Departamento" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Agremiado" Role="Tbl_Agremiado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Departamento">
+              <PropertyRef Name="id_Departamento" />
+            </Principal>
+            <Dependent Role="Tbl_Agremiado">
+              <PropertyRef Name="id_LugarTrabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_usuario0_fk">
+          <End Type="SII_DBModel.Tbl_Usuario" Role="Tbl_Usuario" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Agremiado" Role="Tbl_Agremiado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Usuario">
+              <PropertyRef Name="id_Usuario" />
+            </Principal>
+            <Dependent Role="Tbl_Agremiado">
+              <PropertyRef Name="id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_compania_fk">
+          <End Type="SII_DBModel.Tbl_Compania" Role="Tbl_Compania" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Departamento" Role="Tbl_Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Compania">
+              <PropertyRef Name="id_Compania" />
+            </Principal>
+            <Dependent Role="Tbl_Departamento">
+              <PropertyRef Name="id_Compania" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_ltrabajo1_fk">
+          <End Type="SII_DBModel.Tbl_Departamento" Role="Tbl_Departamento" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Empleado" Role="Tbl_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Departamento">
+              <PropertyRef Name="id_Departamento" />
+            </Principal>
+            <Dependent Role="Tbl_Empleado">
+              <PropertyRef Name="id_LugarTrabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_empleado_fk">
+          <End Type="SII_DBModel.Tbl_Empleado" Role="Tbl_Empleado" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Gestion" Role="Tbl_Gestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Empleado">
+              <PropertyRef Name="id_Empleado" />
+            </Principal>
+            <Dependent Role="Tbl_Gestion">
+              <PropertyRef Name="id_Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_usuario1_fk">
+          <End Type="SII_DBModel.Tbl_Usuario" Role="Tbl_Usuario" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Empleado" Role="Tbl_Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Usuario">
+              <PropertyRef Name="id_Usuario" />
+            </Principal>
+            <Dependent Role="Tbl_Empleado">
+              <PropertyRef Name="id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_ecivil_fk">
+          <End Type="SII_DBModel.Tbl_EstadoCivil" Role="Tbl_EstadoCivil" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Persona" Role="Tbl_Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_EstadoCivil">
+              <PropertyRef Name="id_ECivil" />
+            </Principal>
+            <Dependent Role="Tbl_Persona">
+              <PropertyRef Name="id_ECivil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_tgestion_fk">
+          <End Type="SII_DBModel.Tbl_TipoGestion" Role="Tbl_TipoGestion" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Gestion" Role="Tbl_Gestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_TipoGestion">
+              <PropertyRef Name="id_TipoGestion" />
+            </Principal>
+            <Dependent Role="Tbl_Gestion">
+              <PropertyRef Name="id_TipoGestion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_persona_fk">
+          <End Type="SII_DBModel.Tbl_Persona" Role="Tbl_Persona" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Usuario" Role="Tbl_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Persona">
+              <PropertyRef Name="id_Persona" />
+            </Principal>
+            <Dependent Role="Tbl_Usuario">
+              <PropertyRef Name="id_Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_rol_fk">
+          <End Type="SII_DBModel.Tbl_Rol" Role="Tbl_Rol" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Usuario" Role="Tbl_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Rol">
+              <PropertyRef Name="id_Rol" />
+            </Principal>
+            <Dependent Role="Tbl_Usuario">
+              <PropertyRef Name="id_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="t_tipousu_fk">
+          <End Type="SII_DBModel.Tbl_TipoUsuario" Role="Tbl_TipoUsuario" Multiplicity="1" />
+          <End Type="SII_DBModel.Tbl_Usuario" Role="Tbl_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_TipoUsuario">
+              <PropertyRef Name="id_TipoUsu" />
+            </Principal>
+            <Dependent Role="Tbl_Usuario">
+              <PropertyRef Name="id_TipoUsu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Tbl_Pais">
+          <Key>
+            <PropertyRef Name="id_Pais" />
+          </Key>
+          <Property Name="id_Pais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="country_code" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="country_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Bit_Ingreso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario" Type="Int64" />
+          <Property Name="hora" Type="DateTime" Precision="3" />
+          <Property Name="rol" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Tbl_ActasPDF">
+          <Key>
+            <PropertyRef Name="id_Acta" />
+          </Key>
+          <Property Name="id_Acta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_Creacion_A" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="titulo_Acta" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="subtitulo_Acta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="contenido_Acta" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Tbl_NoticiasPDF">
+          <Key>
+            <PropertyRef Name="id_Noticia" />
+          </Key>
+          <Property Name="id_Noticia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_Creacion_N" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="titulo_Noticia" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="subtitulo_Noticia" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="contenido_Noticia" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SII_DBModelStoreContainer" CdmEntityContainer="SII_Entities">
+          <EntitySetMapping Name="Tbl_Acta">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_Acta">
+              <MappingFragment StoreEntitySet="Tbl_Acta">
+                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+                <ScalarProperty Name="fecha_Cre" ColumnName="fecha_Cre" />
+                <ScalarProperty Name="tipo_Acta" ColumnName="tipo_Acta" />
+                <ScalarProperty Name="id_Acta" ColumnName="id_Acta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Acta_Usuario">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_Acta_Usuario">
+              <MappingFragment StoreEntitySet="Tbl_Acta_Usuario">
+                <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+                <ScalarProperty Name="id_Acta" ColumnName="id_Acta" />
+                <ScalarProperty Name="id_A_U" ColumnName="id_A_U" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Agremiado">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_Agremiado">
+              <MappingFragment StoreEntitySet="Tbl_Agremiado">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id_LugarTrabajo" ColumnName="id_LugarTrabajo" />
+                <ScalarProperty Name="grado_Academico" ColumnName="grado_Academico" />
+                <ScalarProperty Name="afiliado" ColumnName="afiliado" />
+                <ScalarProperty Name="puesto" ColumnName="puesto" />
+                <ScalarProperty Name="colegio_Profesional" ColumnName="colegio_Profesional" />
+                <ScalarProperty Name="profesion" ColumnName="profesion" />
+                <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+                <ScalarProperty Name="id_Agremiado" ColumnName="id_Agremiado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Compania">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_Compania">
+              <MappingFragment StoreEntitySet="Tbl_Compania">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="correo_Electronico" ColumnName="correo_Electronico" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="nom_Compania" ColumnName="nom_Compania" />
+                <ScalarProperty Name="cedula_Juridica" ColumnName="cedula_Juridica" />
+                <ScalarProperty Name="razon_Social" ColumnName="razon_Social" />
+                <ScalarProperty Name="id_Compania" ColumnName="id_Compania" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Deduccion">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_Deduccion">
+              <MappingFragment StoreEntitySet="Tbl_Deduccion">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id_Agremiado" ColumnName="id_Agremiado" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="fecha_Deduccion" ColumnName="fecha_Deduccion" />
+                <ScalarProperty Name="id_Deduccion" ColumnName="id_Deduccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Departamento">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_Departamento">
+              <MappingFragment StoreEntitySet="Tbl_Departamento">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+                <ScalarProperty Name="id_Compania" ColumnName="id_Compania" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+                <ScalarProperty Name="id_Departamento" ColumnName="id_Departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Empleado">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_Empleado">
+              <MappingFragment StoreEntitySet="Tbl_Empleado">
+                <ScalarProperty Name="vac_Restantes" ColumnName="vac_Restantes" />
+                <ScalarProperty Name="vac_Utilizadas" ColumnName="vac_Utilizadas" />
+                <ScalarProperty Name="cant_AusenciasInjustificadas" ColumnName="cant_AusenciasInjustificadas" />
+                <ScalarProperty Name="cant_AusenciasJustificadas" ColumnName="cant_AusenciasJustificadas" />
+                <ScalarProperty Name="total_Vacaciones" ColumnName="total_Vacaciones" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+                <ScalarProperty Name="id_LugarTrabajo" ColumnName="id_LugarTrabajo" />
+                <ScalarProperty Name="superior_Inmediato" ColumnName="superior_Inmediato" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+                <ScalarProperty Name="id_Empleado" ColumnName="id_Empleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_EstadoCivil">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_EstadoCivil">
+              <MappingFragment StoreEntitySet="Tbl_EstadoCivil">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="estado_Civil" ColumnName="estado_Civil" />
+                <ScalarProperty Name="id_ECivil" ColumnName="id_ECivil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Gestion">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_Gestion">
+              <MappingFragment StoreEntitySet="Tbl_Gestion">
+                <ScalarProperty Name="fecha_Ausencia" ColumnName="fecha_Ausencia" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id_TipoGestion" ColumnName="id_TipoGestion" />
+                <ScalarProperty Name="id_Empleado" ColumnName="id_Empleado" />
+                <ScalarProperty Name="fecha_Fin" ColumnName="fecha_Fin" />
+                <ScalarProperty Name="fecha_Inicio" ColumnName="fecha_Inicio" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="id_Gestion" ColumnName="id_Gestion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Persona">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_Persona">
+              <MappingFragment StoreEntitySet="Tbl_Persona">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="correo_Electronico" ColumnName="correo_Electronico" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="fecha_Reg" ColumnName="fecha_Reg" />
+                <ScalarProperty Name="fecha_Nac" ColumnName="fecha_Nac" />
+                <ScalarProperty Name="id_ECivil" ColumnName="id_ECivil" />
+                <ScalarProperty Name="nacionalidad" ColumnName="nacionalidad" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="segundo_Apellido" ColumnName="segundo_Apellido" />
+                <ScalarProperty Name="primer_Apellido" ColumnName="primer_Apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="id_Persona" ColumnName="id_Persona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Rol">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_Rol">
+              <MappingFragment StoreEntitySet="Tbl_Rol">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="tipo_Rol" ColumnName="tipo_Rol" />
+                <ScalarProperty Name="id_Rol" ColumnName="id_Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_TipoGestion">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_TipoGestion">
+              <MappingFragment StoreEntitySet="Tbl_TipoGestion">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="tipo_Gestion" ColumnName="tipo_Gestion" />
+                <ScalarProperty Name="id_TipoGestion" ColumnName="id_TipoGestion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_TipoUsuario">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_TipoUsuario">
+              <MappingFragment StoreEntitySet="Tbl_TipoUsuario">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="tipo_Usuario" ColumnName="tipo_Usuario" />
+                <ScalarProperty Name="id_TipoUsu" ColumnName="id_TipoUsu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Usuario">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_Usuario">
+              <MappingFragment StoreEntitySet="Tbl_Usuario">
+                <ScalarProperty Name="token_recovery" ColumnName="token_recovery" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id_TipoUsu" ColumnName="id_TipoUsu" />
+                <ScalarProperty Name="id_Rol" ColumnName="id_Rol" />
+                <ScalarProperty Name="contrasenia" ColumnName="contrasenia" />
+                <ScalarProperty Name="id_Persona" ColumnName="id_Persona" />
+                <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Pais">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_Pais">
+              <MappingFragment StoreEntitySet="Tbl_Pais">
+                <ScalarProperty Name="country_name" ColumnName="country_name" />
+                <ScalarProperty Name="country_code" ColumnName="country_code" />
+                <ScalarProperty Name="id_Pais" ColumnName="id_Pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Bit_Ingreso">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_Bit_Ingreso">
+              <MappingFragment StoreEntitySet="Tbl_Bit_Ingreso">
+                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_ActasPDF">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_ActasPDF">
+              <MappingFragment StoreEntitySet="Tbl_ActasPDF">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="contenido_Acta" ColumnName="contenido_Acta" />
+                <ScalarProperty Name="subtitulo_Acta" ColumnName="subtitulo_Acta" />
+                <ScalarProperty Name="titulo_Acta" ColumnName="titulo_Acta" />
+                <ScalarProperty Name="fecha_Creacion_A" ColumnName="fecha_Creacion_A" />
+                <ScalarProperty Name="id_Acta" ColumnName="id_Acta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_NoticiasPDF">
+            <EntityTypeMapping TypeName="SII_DBModel.Tbl_NoticiasPDF">
+              <MappingFragment StoreEntitySet="Tbl_NoticiasPDF">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="contenido_Noticia" ColumnName="contenido_Noticia" />
+                <ScalarProperty Name="subtitulo_Noticia" ColumnName="subtitulo_Noticia" />
+                <ScalarProperty Name="titulo_Noticia" ColumnName="titulo_Noticia" />
+                <ScalarProperty Name="fecha_Creacion_N" ColumnName="fecha_Creacion_N" />
+                <ScalarProperty Name="id_Noticia" ColumnName="id_Noticia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="9400e45e25e04926bae2e3b0ce6e806f" Name="Diagram1" ZoomLevel="28">
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Acta" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Acta_Usuario" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Agremiado" Width="1.5" PointX="10.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Compania" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Deduccion" Width="1.5" PointX="12.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Departamento" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Empleado" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_EstadoCivil" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Gestion" Width="1.5" PointX="9.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Persona" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Rol" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_TipoGestion" Width="1.5" PointX="7.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_TipoUsuario" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Usuario" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Pais" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_Bit_Ingreso" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SII_DBModel.t_acta0_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="SII_DBModel.t_usuario2_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="SII_DBModel.t_agremiado0_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="SII_DBModel.t_ltrabajo0_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="SII_DBModel.t_usuario0_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="SII_DBModel.t_compania_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="SII_DBModel.t_ltrabajo1_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="SII_DBModel.t_empleado_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="SII_DBModel.t_usuario1_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="SII_DBModel.t_ecivil_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="SII_DBModel.t_tgestion_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="SII_DBModel.t_persona_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="SII_DBModel.t_rol_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="SII_DBModel.t_tipousu_fk" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_ActasPDF" Width="1.5" PointX="8.125" PointY="12.375" />
+        <EntityTypeShape EntityType="SII_DBModel.Tbl_NoticiasPDF" Width="1.5" PointX="10.125" PointY="12.375" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

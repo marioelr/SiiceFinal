@@ -1,0 +1,39 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model List<Sindicato_v1.Models.ViewModels.SelectRolesViewModel>
+
+<div class="row">
+    <div class="table-responsive col-lg-12">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Rol</th>
+                    <th>Activar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj_Rol in Model)
+                {
+                    <tr>
+                        <th>@obj_Rol.id_R</th>
+                        <td>@obj_Rol.rol</td>
+                        <td>
+                            <a class="btn btn-success" href="/Rol/Activar_Rol/@obj_Rol.id_R" onclick=" return ActivateConfirm()" title="Habilitar" style="width:80px; height:35px">
+                                <img src="~/Content/Resources/Images/activate.png" height="20" />
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @*<div style="text-align: center;">
+            @Html.PagedListPager(Model, page => Url.Action("Inha_Rol", new { page }))
+        </div>*@
+        <div>
+            <a href="javascript:close_window();" title="Cerrar">Cerrar</a>
+        </div>
+    </div>
+</div>
+

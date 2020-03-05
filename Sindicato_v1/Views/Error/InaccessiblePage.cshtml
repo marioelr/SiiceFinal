@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Error";
+}
+<br />
+<br />
+<br />
+
+<div style="text-align: center">
+    <h2>Lo sentimos.</h2>
+</div>
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="~/Content/Resources/Images/logoSIICE_Login.png" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- Login Form -->
+        <form action="~/Usuario/@ViewData["View"]">
+            <h3>
+                ¡Esta página no se existe!
+            </h3>
+            <span class="glyphicon glyphicon-thumbs-down logo"></span>
+            <br />
+            <input type="submit" class="fadeIn fourth" value="Volver">
+        </form>
+    </div>
+</div>
+
+<!--Validadciones-->
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="~/Content/login-style.css" rel="stylesheet" />

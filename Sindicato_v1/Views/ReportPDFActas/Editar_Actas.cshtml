@@ -1,0 +1,81 @@
+﻿@model Sindicato_v1.Models.ViewModels.AddActasViewModel
+
+@{
+    ViewBag.Title = "Editar_Actas";
+}
+
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+<br />
+<br />
+<br />
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="~/Usuario/Documentos">Documentos</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+                <li><a href="~/Usuario/close_session" onclick="return LeaveConfirm()"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<ul class="breadcrumb">
+    <li><a href="https://localhost:44378/#inicio">SIICE - Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li><a href="/Usuario/Documentos/">Documentos</a></li>
+    <li><a href="/ReportPDFActas/ShowActas/">Actas</a></li>
+    <li>Edición de Actas</li>
+</ul>
+
+<div>
+    <h2>Edición de Actas</h2>
+    <h4>Ingrese la informacion de la acta que desee editar</h4>
+</div>
+
+@using (Html.BeginForm("Editar_Actas", "ReportPDFActas", FormMethod.Post))
+{
+
+<div class="form-horizontal">
+
+    <hr class="hr-custom" />
+
+    @Html.HiddenFor(model => model.id_Actas)
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.LabelFor(model => model.titulo)
+            @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control", placeholder = "Título del acta" } })
+            @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.LabelFor(model => model.subtitulo)
+            @Html.EditorFor(model => model.subtitulo, new { htmlAttributes = new { @class = "form-control", placeholder = "Subtítulo del acta" } })
+            @Html.ValidationMessageFor(model => model.subtitulo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.LabelFor(model => model.texto)
+            @Html.EditorFor(model => model.texto, new { htmlAttributes = new { @class = "form-control", placeholder = "Ingrese el contenido del acta en este espacio..." } })
+            @Html.ValidationMessageFor(model => model.texto, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-lg-12">
+            <input type="submit" value="Guardar" class="btn btn-custom1" />
+        </div>
+    </div>
+</div>
+}

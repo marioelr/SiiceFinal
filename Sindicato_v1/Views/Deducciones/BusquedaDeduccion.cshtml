@@ -1,0 +1,167 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Sindicato_v1.Models.ViewModels.SelectDeduccionesViewModel>
+
+@{
+    ViewBag.Title = "Gestión Deducciones";
+}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+<br />
+<br />
+<br />
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="~/Usuario/Documentos">Documentos</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+                <li><a href="~/Usuario/close_session" onclick="return LeaveConfirm()"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="https://localhost:44378/#inicio">SIICE - Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Gestión Deducciones</li>
+</ul>
+
+<div>
+    <h2>Gestión Deducciones</h2>
+    <h4>A continuación se le muestra la lista de agremiados con sus respectiva deducciones, también se pueden agregar las deducciones correspondientes, presionando el siguiente botón:</h4>
+</div>
+
+
+<hr class="hr-custom" />
+
+<a href="~/Deducciones.aspx" type="button" class="btn btn-custom1 btn-lg btn-block">Cargar deducciones</a>
+
+<hr />
+
+@using (Html.BeginForm("BusquedaDeduccion", "Deducciones", FormMethod.Post))
+{
+    <h5>Ingrese el número de cédula para buscar deducciones:</h5>
+    <div id="errores" class="row">
+        <div class="col-xs-3">
+            @Html.TextBox("cedula", "", new { @class = "form-control validate[custom[onlyNumberSp]]" })
+        </div>
+        <button class="btn btn-default" type="submit">
+            <img src="~/Content/Resources/Images/search.png" height="20" /> Buscar deducción
+        </button>
+    </div>
+}
+
+@if (Model != null)
+{
+    <br />
+    <div class="row">
+        <div class="table-responsive col-lg-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th></th>
+                        <th>Fecha deducción</th>
+                        <th>Monto</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var deduccion in Model)
+                    {
+                        <tr>
+                            <th>@deduccion.cedula</th>
+                            <td>@deduccion.nombre</td>
+                            <td>@deduccion.primer_apellido</td>
+                            <td>@deduccion.segundo_apellido </td>
+                            <td>@deduccion.fecha_deduccion</td>
+                            <td>@deduccion.monto</td>
+                            <td>
+                                <a class="btn btn-danger" onclick=" return DeleteConfirm()" title="Desactivar" href="/Deducciones/Eliminar_Ded/@deduccion.id" style="width:80px; height:35px">
+                                    <img src="~/Content/Resources/Images/delete.png" height="20" />
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div style="text-align: center;">
+                @Html.PagedListPager(Model, page => Url.Action("BusquedaDeduccion", new { page }))
+            </div>
+            <div>
+                <a href="/Usuario/Administrador/">Volver</a>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+
+@if (ViewBag.Msg == "Eliminado")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Confirmación",
+                text: "¡Se eliminó exitosamente!",
+                icon: "warning"
+            });
+        }
+    </script>
+}
+
+@if (ViewBag.Msg == "Error")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "ERROR",
+                text: "¡Este elemento no se puede eliminar porque está siendo utilizado!",
+                icon: "error"
+            });
+        }
+    </script>
+}
+
+<script type="text/javascript">
+    function DeleteConfirm() {
+        if (confirm("¿Eliminar este registro?"))
+            return true;
+        else
+            return false;
+    }
+</script>

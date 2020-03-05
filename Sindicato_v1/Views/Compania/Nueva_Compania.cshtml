@@ -1,0 +1,115 @@
+﻿@model Sindicato_v1.Models.ViewModels.AddCompaniaViewModel
+
+@{
+    ViewBag.Title = "Nueva Compañía";
+}
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br />
+<br />
+<br />
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="~/Usuario/Documentos">Documentos</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+                <li><a href="~/Usuario/close_session" onclick="return LeaveConfirm()"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="https://localhost:44378/#inicio">SIICE - Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li><a href="/Compania/Mant_Compania/">Compañías</a></li>
+    <li>Agregar compañía</li>
+</ul>
+
+<div>
+    <h2>Agregar compañía</h2>
+    <h4>Ingrese la informacion de la compañia que desea agregar</h4>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Nueva_Compania", "Compania", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.razon_Soc)
+                @Html.TextBoxFor(d => d.razon_Soc, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]", placeholder="Razón social de la compañía" })
+                @Html.ValidationMessageFor(d => d.razon_Soc, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(d => d.cedula_Jud)
+                @Html.TextBoxFor(d => d.cedula_Jud, "", new { @class = "form-control validate[required, custom[onlyNumberSp]]", placeholder="Cédula jurídica de la compañía" })
+                @Html.ValidationMessageFor(d => d.cedula_Jud, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(d => d.nombre_Comp)
+                @Html.TextBoxFor(d => d.nombre_Comp, "", new { @class = "form-control validate[required,custom[onlyLetterAccentSp]]", placeholder="Nombre de la compañía" })
+                @Html.ValidationMessageFor(d => d.nombre_Comp, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(d => d.direc)
+                @Html.TextBoxFor(d => d.direc, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]", placeholder="Dirección de la compañía" })
+                @Html.ValidationMessageFor(d => d.direc, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(d => d.tel)
+                @Html.TextBoxFor(d => d.tel, "", new { @class = "form-control validate[required, custom[onlyNumberSp]]", placeholder="Formato: 88888888" })
+                @Html.ValidationMessageFor(d => d.tel, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(d => d.correo)
+                @Html.TextBoxFor(d => d.correo, "", new { @class = "form-control validate[required, custom[email]]", placeholder="Formato: correoelectronico@ejemplo.com" })
+                @Html.ValidationMessageFor(d => d.correo, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-custom1" type="submit" />
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>

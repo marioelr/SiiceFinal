@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Sindicato de Ingenieros y Profesionales del ICE, RACSA y CNFL.</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
+    <script src="~/Scripts/smooth-scrolling.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/reportes_agr.js"></script>
+    <script src="~/Scripts/reportes_ded.js"></script>
+    <script src="~/Scripts/solicitud.js"></script>
+</head>
+<body>
+    <div class="container body-content">
+        @RenderBody()
+        <hr class="hr-custom" />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - SIICE V1.0</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    @**/VALIDACIONES/*@
+    <link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validationEngine-en.js"></script>
+    <script src="~/Scripts/jquery.validationEngine.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#errores").validationEngine();
+        });
+        $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+    </script>
+    <script>
+        jQuery(document).ready(function () {
+            jQuery("#errores").validationEngine();
+        });
+    </script>
+
+    @*/*NOTIFICACIONES*/*@
+    <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            // Proxy created on the fly
+            var not = $.connection.notificationsHub;
+
+            // Declare a function on the job hub so the server can invoke it
+            not.client.displayNotifications = function () {
+                getData();
+            };
+
+            // Start the connection
+            $.connection.hub.start();
+            getData();
+        });
+
+        function getData() {
+            var $tbl = $('#tblInfo');
+            $.ajax({
+                url: $("#Get").val(),
+                type: 'GET',
+                datatype: 'json',
+                success: function (data) {
+                    $tbl.empty();
+
+                    $.each(data.listNoti, function (i, model) {
+                        $tbl.append
+                            (
+                                '<tr>' +
+                                '<td>' + model.Cedula + '</td>' +
+                                '<td>' + model.Nombre + '</td>' +
+                                '<td>' + model.Apellido1 + '</td>' +
+                                '<td>' + model.Apellido2 + '</td>' +
+                                '<tr>'
+                            );
+                    });
+                }
+            });
+        }
+    </script>
+    <script>
+        $(window).scroll(function () {
+            var winScrollTop = $(window).scrollTop();
+            var winHeight = $(window).height();
+            var floaterHeight = $('#floater').outerHeight(true);
+            //true so the function takes margins into account
+            var fromBottom = 20;
+
+            var top = winScrollTop + winHeight - floaterHeight - fromBottom;
+            $('#floater').css({ 'top': top + 'px' });
+        });
+    </script>
+
+    @*/CERRAR SESION/*@
+    <script type="text/javascript">
+        function LeaveConfirm() {
+            if (confirm("¿Desea cerrar sesión y volver a la pantalla de login?"))
+                return true;
+            else
+                return false;
+        }
+    </script>
+
+</body>
+</html>

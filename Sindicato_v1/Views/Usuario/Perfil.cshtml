@@ -1,0 +1,232 @@
+﻿
+@{
+    ViewBag.Title = "Perfil";
+}
+
+<head>
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/css/nivo-lightbox.css" rel="stylesheet" />
+    <link href="~/css/templatemo-style.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://kit.fontawesome.com/2c060e3026.js" crossorigin="anonymous"></script>
+</head>
+
+<br />
+<br/>
+<br/>
+<!-- navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/EditaPerfil/Editar_Perfil">Perfil</a></li>
+                <li><a href="~/Usuario/Actas">Actas</a></li>
+                <li><a href="~/Usuario/Noticias">Noticias</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+                <li><a href="~/Usuario/close_session" onclick="return LeaveConfirm()"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="https://localhost:44378/#inicio">SIICE - Inicio</a></li>
+    <li>Mi perfil</li>
+</ul>
+
+<!-- home section -->
+<div id="home" class="row">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-sm-3"></div>
+            <div class="col-md-7 col-sm-9">
+                <h2>Bienvenido a</h2>
+                <h3>SIICE</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- divider section -->
+<div class="divider row">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6" onclick="location.href='/Usuario/Actas';">
+                <div class="divider-wrapper divider-one">
+                    <i class="fa fa-dochub fa-10x"></i>
+                    <h2>Actas</h2>
+                    <p>Consulte las últimas actas que se han elaborado en el sindicato.</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6" onclick="location.href='/Usuario/Noticias';">
+                <div class="divider-wrapper divider-two">
+                    <i class="fa fa-newspaper fa-10x"></i>
+                    <h2>Noticias</h2>
+                    <p>En esta sección puede encontrar las ultimas noticias que se han presentado y se han agregado para los agremiados.</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12" onclick="location.href='/EditaPerfil/Editar_Perfil';">
+                <div class="divider-wrapper divider-three">
+                    <i class="fa fa-user fa-10x"></i>
+                    <h2>Gestione su perfil</h2>
+                    <p>Edite su información , tanto personal como institucional, mantengase al día, recuerde que nuestro sindicato necesita agremiados persistentes y en constante actividad.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- about section -->
+<div id="about" class="row">
+    <div class="container">
+        <div class="row">
+            @*<div class="col-md-6 col-sm-12">
+                    <img src="~/images/about-img.jpg" class="img-responsive" alt="about img">
+                </div>
+                <div class="col-md-6 col-sm-12 about-des">
+                    <h1>Startup Business</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. Dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. Dolore magna aliquam erat volutpat.</p>
+                    <a href="about.html" class="btn btn-default">LEARN MORE</a>
+                </div>*@
+            <div id="convenios" class="container-fluid text-center">
+                <h2>Convenios destacados</h2>
+                <br>
+                <div class="row slideanim">
+                    <div class="col-sm-4">
+                        <a href=""><img src="~/Content/Resources/Images/conuci.png" alt="image 1" class="img-thumbnail" style="max-width:100%;height: auto;"></a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href=""><img src="~/Content/Resources/Images/conyuxta.png" alt="image 2" class="img-thumbnail" style="max-width:100%;height: auto;"></a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href=""><img src="~/Content/Resources/Images/conswan.png" alt="image 3" class="img-thumbnail" style="max-width:100%;height: auto;"></a>
+                    </div>
+                </div>
+                <br><br>
+                <div class="row slideanim">
+                    <hr class="hr-custom"><br>
+                    <h2>Otros convenios</h2><br>
+                    <div class="col-sm-4">
+                        <span class="glyphicon glyphicon-cutlery logo-small"></span>
+                        <h4><a class="custom" href="#">Alimentación (3)</a></h4>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="glyphicon glyphicon-plus logo-small"></span>
+                        <h4><a class="custom" href="#">Funerarias (2)</a></h4>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="glyphicon glyphicon-phone logo-small"></span>
+                        <h4><a class="custom" href="#">Tecnología (4)</a></h4>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="glyphicon glyphicon-road logo-small"></span>
+                        <h4><a class="custom" href="#">Transporte (2)</a></h4>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="glyphicon glyphicon-education logo-small"></span>
+                        <h4><a class="custom" href="#">Educación (6)</a></h4>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="glyphicon glyphicon-heart-empty logo-small"></span>
+                        <h4><a class="custom" href="#">Salud (14)</a></h4>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="glyphicon glyphicon-credit-card logo-small"></span>
+                        <h4><a class="custom" href="#">Tiendas departamentales (1)</a></h4>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="glyphicon glyphicon-bed logo-small"></span>
+                        <h4><a class="custom" href="#">Turismo (20)</a></h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="portfolio" class="row">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8 col-sm-12">
+                <h1>Últimos eventos</h1>
+                <p>Conozca los ultimos eventos que se han presentado en el sindicato, aquí tiene una muestra de las actividades que se realizaron y como se desarrollan los eventos.</p>
+            </div>
+        </div>
+
+        <div class="row mt30">
+
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <a href="~/Content/Resources/Images/Portafolio/1.jpg" data-lightbox-gallery="portfolio-gallery"><img src="~/Content/Resources/Images/Portafolio/2.jpg" alt="portfolio img"></a>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <a href="~/Content/Resources/Images/Portafolio/4.jpg" data-lightbox-gallery="portfolio-gallery"><img src="~/Content/Resources/Images/Portafolio/5.jpg" alt="portfolio img"></a>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <a href="~/Content/Resources/Images/Portafolio/8.jpg" data-lightbox-gallery="portfolio-gallery"><img src="~/Content/Resources/Images/Portafolio/12.jpg" alt="portfolio img"></a>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <a href="~/Content/Resources/Images/Portafolio/10.jpg" data-lightbox-gallery="portfolio-gallery"><img src="~/Content/Resources/Images/Portafolio/7.jpg" alt="portfolio img"></a>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <a href="~/Content/Resources/Images/Portafolio/3.jpg" data-lightbox-gallery="portfolio-gallery"><img src="~/Content/Resources/Images/Portafolio/4.jpg" alt="portfolio img"></a>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <a href="~/Content/Resources/Images/Portafolio/5.jpg" data-lightbox-gallery="portfolio-gallery"><img src="~/Content/Resources/Images/Portafolio/11.jpg" alt="portfolio img"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="container">
+
+        <div class="col-md-5 col-sm-4">
+            <img src="~/Content/Resources/Images/logo_Login.png" style="max-width:40%;" class="img-responsive" alt="logo">
+            <p>
+                Sindicato de Ingenieros y Profesionales del ICE, RACSA y CNFL.
+            </p>
+            <p><i class="fa fa-phone"></i> +506 2290-8801 / 2290-8802</p>
+            <p><i class="fa fa-envelope-o"></i> siice@ice.go.cr</p>
+            <p>
+                <i class="fa fa-globe"></i> Sabana Sur, del Restaurante
+                Mc Donald’s 100m Este y 50m Sur
+            </p>
+        </div>
+
+        @*<div class="col-md-3 col-sm-4">
+                <h3 class="custom">Useful Links</h3>
+                <p><a href="#">HTML5 Templates</a></p>
+                <p><a href="#">CSS3 Tricks</a></p>
+                <p><a href="#">Design Blog</a></p>
+                <p><a href="#">Animations</a></p>
+            </div>*@
+
+        @*<div class="col-md-4 col-sm-4 newsletter">
+                <h3 class="custom">Newsletter</h3>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismo.</p>
+                <div class="input-group">
+                    <form action="#" method="post">
+                        <input name="email" type="text" placeholder="Enter your email" class="form-control" autorequired>
+                        <button type="submit" name="submit" class="btn btn-custom1">Submit</button>
+                    </form>
+                </div>
+            </div>*@
+
+    </div>
+</div>
+
+<script src="~/js/custom.js"></script>
+<script src="~/js/jquery.js"></script>
+<script src="~/js/nivo-lightbox.min.js"></script>

@@ -1,0 +1,2594 @@
+<!--Agremiados-->
+
+@model List<Sindicato_v1.Models.ViewModels.SelectAgremiadosViewModel>
+
+@{
+    ViewBag.Title = "Agremiados";
+}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Agremiados</li>
+</ul>
+
+<div>
+    <h2>Agremiados</h2>
+    <h5>Lista de las personas agremiadas al sindicato</h5>
+</div>
+
+<hr class="hr-custom"/>
+
+@using (Html.BeginForm("Agremiados", "Agremiado", FormMethod.Post))
+{
+    <div id="errores">
+        <h4>Ingrese el número de cédula  del agremiado que desee consultar:</h4>
+        @Html.TextBox("cedula", "", new { @class = "validate[custom[onlyNumberSp]]" })
+        <button type="submit">Buscar</button>
+    </div>
+}
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre</th>
+                        <th>Primer apellido</th>
+                        <th>Segundo apellido</th>
+                        <th>Teléfono</th>
+                        <th>Correo electrónico</th>
+                        <th>Puesto</th>
+                        <th>Profesión</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var agremiado in Model)
+                    {
+                        <tr>
+                            <th>@agremiado.cedula</th>
+                            <td>@agremiado.nombre</td>
+                            <td>@agremiado.primer_Apellido</td>
+                            <td>@agremiado.segundo_Apellido </td>
+                            <td>@agremiado.telefono</td>
+                            <td>@agremiado.correo_Electronico</td>
+                            <td>@agremiado.puesto</td>
+                            <td>@agremiado.profesion</td>
+                            <td>
+                                <a class="btn btn-default" href="@agremiado.cedula" style="width:80px; height:35px">Editar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+<!--Compania Editar-->
+
+@model Sindicato_v1.Models.ViewModels.AddCompaniaViewModel
+
+@{
+    ViewBag.Title = "Editar_Compania";
+}
+
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Editar Compañía</li>
+</ul>
+
+<div>
+    <h2>Editar Compañía</h2>
+    <h5>Ingrese la nueva información en su respectivo campo</h5>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Editar_Compania", "Compania", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            @Html.HiddenFor(d => d.id_Comp)
+            <div>
+                <h5><b>Razon social</b></h5>
+                @Html.TextBoxFor(d => d.razon_Soc, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.razon_Soc, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Cédula jurídica</b></h5>
+                @Html.TextBoxFor(d => d.cedula_Jud, "", new { @class = "form-control validate[required, custom[onlyNumberSp]]" })
+                @Html.ValidationMessageFor(d => d.cedula_Jud, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Nombre de la compañía</b></h5>
+                @Html.TextBoxFor(d => d.nombre_Comp, "", new { @class = "form-control validate[required,custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.nombre_Comp, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Dirección</b></h5>
+                @Html.TextBoxFor(d => d.direc, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.direc, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Teléfono</b></h5>
+                @Html.TextBoxFor(d => d.tel, "", new { @class = "form-control validate[required, custom[onlyNumberSp]]" })
+                @Html.ValidationMessageFor(d => d.tel, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Correo electrónico</b></h5>
+                @Html.TextBoxFor(d => d.correo, "", new { @class = "form-control validate[required]" })
+                @Html.ValidationMessageFor(d => d.correo, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+<!--Compania Mant-->
+
+@model Sindicato_v1.Models.ViewModels.AddCompaniaViewModel
+
+@{
+    ViewBag.Title = "Editar_Compania";
+}
+
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Editar Compañía</li>
+</ul>
+
+<div>
+    <h2>Editar Compañía</h2>
+    <h5>Ingrese la nueva informacion en su respectivo campo</h5>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Editar_Compania", "Compania", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            @Html.HiddenFor(d => d.id_Comp)
+            <div>
+                <h5><b>Razon social</b></h5>
+                @Html.TextBoxFor(d => d.razon_Soc, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.razon_Soc, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Cédula jurídica</b></h5>
+                @Html.TextBoxFor(d => d.cedula_Jud, "", new { @class = "form-control validate[required, custom[onlyNumberSp]]" })
+                @Html.ValidationMessageFor(d => d.cedula_Jud, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Nombre de la compañía</b></h5>
+                @Html.TextBoxFor(d => d.nombre_Comp, "", new { @class = "form-control validate[required,custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.nombre_Comp, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Dirección</b></h5>
+                @Html.TextBoxFor(d => d.direc, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.direc, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Teléfono</b></h5>
+                @Html.TextBoxFor(d => d.tel, "", new { @class = "form-control validate[required, custom[onlyNumberSp]]" })
+                @Html.ValidationMessageFor(d => d.tel, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Correo electrónico</b></h5>
+                @Html.TextBoxFor(d => d.correo, "", new { @class = "form-control validate[required]" })
+                @Html.ValidationMessageFor(d => d.correo, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+<!--Compania Nueva-->
+
+@model Sindicato_v1.Models.ViewModels.AddCompaniaViewModel
+
+@{
+    ViewBag.Title = "Nuevo_Compania";
+}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Agregar compañía</li>
+</ul>
+
+<div>
+    <h2>Agregar compañía</h2>
+    <h5>Ingrese la informacion de la compañia que desee agregar</h5>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Nueva_Compania", "Compania", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            <div>
+                <h5><b>Razón social</b></h5>
+                @Html.TextBoxFor(d => d.razon_Soc, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.razon_Soc, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Cédula juridica</b></h5>
+                @Html.TextBoxFor(d => d.cedula_Jud, "", new { @class = "form-control validate[required, custom[onlyNumberSp]]" })
+                @Html.ValidationMessageFor(d => d.cedula_Jud, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Nombre de la compañía</b></h5>
+                @Html.TextBoxFor(d => d.nombre_Comp, "", new { @class = "form-control validate[required,custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.nombre_Comp, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Direccion</b></h5>
+                @Html.TextBoxFor(d => d.direc, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.direc, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div> 
+                <h5><b>Teléfono</b></h5>
+                @Html.TextBoxFor(d => d.tel, "", new { @class = "form-control validate[required, custom[onlyNumberSp]]" })
+                @Html.ValidationMessageFor(d => d.tel, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Correo electrónico</b></h5>
+                @Html.TextBoxFor(d => d.correo, "", new { @class = "form-control validate[required]" })
+                @Html.ValidationMessageFor(d => d.correo, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+
+}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+<!--Deducciones-->
+
+@model List<Sindicato_v1.Models.ViewModels.SelectBDeduccionesViewModel>
+
+@{
+    ViewBag.Title = "Busqueda Deduccion";
+}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Administrativo</li>
+</ul>
+
+<div>
+    <h2>Deducciones</h2>
+    <h5>A continuación se le muestra la lista de agremiados con sus respectiva deducciones</h5>
+</div>
+
+
+<hr class="hr-custom" />
+
+@using (Html.BeginForm("BusquedaDeduccion", "Deducciones", FormMethod.Post))
+{
+    <h4>Ingrese el número de cédula para buscar las deducciones:</h4>
+    <div id="errores">
+        @Html.TextBox("cedula", "", new { @class = "validate[custom[onlyNumberSp]]" })
+        <button type="submit">Buscar</button>
+    </div>
+}
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre</th>
+                        <th>Primer apellido</th>
+                        <th>Segundo apellido</th>
+                        <th>Teléfono</th>
+                        <th>Correo electrónico</th>
+                        <th>Puesto</th>
+                        <th>Fecha deducción</th>
+                        <th>Monto</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var deduccion in Model)
+                    {
+                        <tr>
+                            <th>@deduccion.cedula</th>
+                            <td>@deduccion.nombre</td>
+                            <td>@deduccion.primer_apellido</td>
+                            <td>@deduccion.segundo_apellido </td>
+                            <td>@deduccion.telefono</td>
+                            <td>@deduccion.correo</td>
+                            <td>@deduccion.puesto</td>
+                            <td>@deduccion.fecha_deduccion</td>
+                            <td>@deduccion.monto</td>
+                            <td>
+                                <a class="btn btn-default" href="@deduccion.cedula" style="width:80px; height:35px">Editar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <a href="~/Deducciones.aspx" type="button" class="btn btn-primary btn-lg btn-block">Cargar deducciones</a>
+        </div>
+    </div>
+}
+
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+<!--Departamento Editar-->
+
+@model Sindicato_v1.Models.ViewModels.AddDepartamentoViewModel
+
+@{
+    ViewBag.Title = "Editar_Departamento";
+}
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Editar departamento</li>
+</ul>
+
+<div>
+    <h2>Editar Departamento</h2>
+    <h5>Ingrese la nueva información en su respectivo campo</h5>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Editar_Departamento", "Departamento", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            @Html.HiddenFor(d => d.id_D)
+            <div>
+                <h5><b>Departamento</b></h5>
+                @Html.TextBoxFor(d => d.depart, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.depart, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Ubicación
+                <br />
+                @Html.DropDownList("ubic", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text = "San José"},
+                    new SelectListItem{ Text = "Alajuela"},
+                    new SelectListItem{ Text = "Heredia"},
+                    new SelectListItem{ Text = "Cartago"},
+                    new SelectListItem{ Text = "Puntarenas"},
+                    new SelectListItem{ Text = "Guanacaste"},
+                    new SelectListItem{ Text = "Limón"}
+                }, "Seleccione la ubicación", new { @class = "form-control validate[required]" })
+                @Html.ValidationMessageFor(d => d.ubic, null, new { @class = "text-danger " })
+            </div>
+            <br />
+            <div>
+                <h5><b>Compañía</b></h5>
+                <br />
+                @Html.DropDownListFor(d => d.id_Comp, ViewBag.CompaniaList as SelectList, "---Selecione la compañía---", new { @class = "form-control validate[required]" })
+                <br />
+            </div>
+            <br />
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+<!--Departamento Mant-->
+
+@model IEnumerable<Sindicato_v1.Models.ViewModels.SelectDepartamentoViewModel>
+
+@{
+    ViewBag.Title = "Mant_Departamento";
+}
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Gestión de Departamentos</li>
+</ul>
+
+<div>
+    <h2>Gestión de Departamentos</h2>
+    <h5>A continuación se le muestra la lista de departamentos existentes dentro del sistema</h5>
+</div>
+
+<hr class="hr-custom"/>
+
+<div class="container" style="text-align: left; padding: 5px;">
+    <a href="~/Departamento/Nuevo_Departamento" class="btn btn-primary">Nuevo</a>
+</div>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Departamento</th>
+                    <th>Ubicación</th>
+                    <th>Compañia</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj_Dep in Model)
+                {
+                    <tr>
+                        <th>@obj_Dep.id_D</th>
+                        <td>@obj_Dep.depart</td>
+                        <td>@obj_Dep.ubic</td>
+                        <td>@obj_Dep.nom_Comp </td>
+                        <td>
+                            <a class="btn btn-default" href="/Departamento/Editar_Departamento/@obj_Dep.id_D" style="width:80px; height:35px;">Editar</a>
+                            @if (obj_Dep.est == 3)
+                            {
+                                <a class="btn btn-warning" href="/Departamento/Eliminar_Departamento/@obj_Dep.id_D" style="width:80px; height:35px; display:none;">Eliminar</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-warning" href="/Departamento/Eliminar_Departamento/@obj_Dep.id_D" style="width:80px; height:35px;">Eliminar</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+-------------------------------------------------------------------------------------------------------------------
+<!--Departamento Nuevo-->
+
+@model Sindicato_v1.Models.ViewModels.AddDepartamentoViewModel
+
+@{
+    ViewBag.Title = "Nuevo_Departamento";
+}
+
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Editar departamento</li>
+</ul>
+
+<div>
+    <h2>Editar Departamento</h2>
+    <h5>Ingrese la informacion del nuevo departamento desee agregar</h5>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Nuevo_Departamento", "Departamento", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            <div>
+                <h5><b>Departamento</b></h5>
+                @Html.TextBoxFor(d => d.depart, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.depart, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Ubicación</b></h5>
+                <br />
+                @Html.DropDownList("ubic", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text = "San José"},
+                    new SelectListItem{ Text = "Alajuela"},
+                    new SelectListItem{ Text = "Heredia"},
+                    new SelectListItem{ Text = "Cartago"},
+                    new SelectListItem{ Text = "Puntarenas"},
+                    new SelectListItem{ Text = "Guanacaste"},
+                    new SelectListItem{ Text = "Limón"}
+                }, "---Seleccione la ubicación---", new { @class = "form-control validate[required]" })
+                @Html.ValidationMessageFor(d => d.ubic, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Compañía</b></h5>
+                <br />
+                @Html.DropDownListFor(d => d.id_Comp, ViewBag.CompaniaList as SelectList, "---Selecione la compañía---", new { @class = "form-control validate[required]" })
+                <br />
+            </div>
+            <br />
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+<!--Empleado Editar-->
+
+@model Sindicato_v1.Models.ViewModels.AddEmpleadosViewModel
+
+@{
+    ViewBag.Title = "Nuevo Empleado";
+}
+
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Editar empleado</li>
+</ul>
+
+<div>
+    <h2>Editar empleado</h2>
+    <h5>Ingrese la nueva información en su respectivo campo</h5>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Editar_Empleado", "Empleado", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            @Html.HiddenFor(p => p.id_Persona)
+
+            <!--PERSONA-->
+            <div>
+                <h5><b>Cédula</b></h5>
+                @Html.TextBoxFor(p => p.cedula, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(p => p.cedula, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Nombre</b></h5>
+                @Html.TextBoxFor(p => p.nombre, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(p => p.nombre, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Primer apellido</b></h5>
+                @Html.TextBoxFor(p => p.primer_apellido, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(p => p.primer_apellido, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Segundo apellido</b></h5>
+                @Html.TextBoxFor(p => p.segundo_apellido, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(p => p.nombre, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Género</b></h5>
+                @Html.TextBoxFor(p => p.Genero, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(p => p.Genero, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Nacionalidad</b></h5>
+                @Html.TextBoxFor(p => p.nacionalidad, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(p => p.nacionalidad, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Teléfono</b></h5>
+                @Html.TextBoxFor(p => p.Telefono, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(p => p.Telefono, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Dirección</b></h5>
+                @Html.TextBoxFor(p => p.Direccion, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(p => p.Direccion, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Correo electrónico</b></h5>
+                @Html.TextBoxFor(p => p.correo_Electronico, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(p => p.correo_Electronico, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Estado civil</b></h5>
+                <br />
+                @Html.DropDownListFor(p => p.id_ECivil, ViewBag.EstadoCivilList as SelectList, "---Selecione el estado civil---", new { @class = "form-control validate[required]" })
+                <br />
+            </div>
+            <br />
+            <div>
+                <h5><b>Rol</b></h5>
+                <br />
+                @Html.DropDownListFor(p => p.id_Rol, ViewBag.RolList as SelectList, "---Selecione el rol---", new { @class = "form-control validate[required]" })
+                <br />
+            </div>
+            <br />
+            <div>
+                <h5><b>Tipo de usuario</b></h5>
+                <br />
+                @Html.DropDownListFor(u => u.id_TipoUsu, ViewBag.UsuarioList as SelectList, "---Selecione el estado civil---", new { @class = "form-control validate[required]" })
+                <br />
+            </div>
+            <div>
+                <h5><b>Teléfono</b></h5>
+                @Html.TextBoxFor(p => p.Telefono, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(p => p.nombre, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <!--USUARIO-->
+            <div>
+                <h5><b>Contraseña</b></h5>
+                @Html.TextBoxFor(u => u.contrasenia, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(u => u.contrasenia, null, new { @class = "text-danger" })
+            </div>
+            <br />
+
+            <!--EMPLEADO-->
+            <div>
+                <h5><b>Cargo</b></h5>
+                @Html.TextBoxFor(e => e.cargo, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(e => e.cargo, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Superior inmediato</b></h5>
+                @Html.TextBoxFor(e => e.superior_Inmediato, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(e => e.superior_Inmediato, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <br />
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+}
+-------------------------------------------------------------------------------------------------------------------
+<!--Empleado Mant-->
+
+@model List<Sindicato_v1.Models.ViewModels.SelectEmpleadoViewModel>
+
+@{
+    ViewBag.Title = "Mant_Compania";
+}
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Gestión de empleados</li>
+</ul>
+<div>
+    <h2>Gestión de empleado</h2>
+    <h5>Lista de los empleados que laboran en el sindicato</h5>
+</div>
+
+<hr class="hr-custom">
+
+<div class="container" style="text-align: left; padding: 5px;">
+    <a href="~/Empleado/Nuevo_Empleado" class="btn btn-primary">Nuevo</a>
+</div>
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Cédula</th>
+                    <th>Nombre</th>
+                    <th>Primer apellido</th>
+                    <th>Segundo apellido</th>
+                    <th>Cargo</th>
+                    <th>Correo electrónico</th>
+                    <th>Usuario</th>
+                    <th>Rol</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj_Emp in Model)
+                {
+                <tr>
+                    <th>@obj_Emp.id_Empleado</th>
+                    <td>@obj_Emp.cedula</td>
+                    <td>@obj_Emp.nombre</td>
+                    <td>@obj_Emp.primer_apellido</td>
+                    <td>@obj_Emp.segundo_apellido</td>
+                    <td>@obj_Emp.cargo</td>
+                    <td>@obj_Emp.correo_Electronico</td>
+                    <td>@obj_Emp.tipo_Usuario</td>
+                    <td>@obj_Emp.tipo_Rol</td>
+                    <td>
+                        <a class="btn btn-default" href="/Empleado/Editar_Empleado/@obj_Emp.id_Persona" style="width:80px; height:35px;">Editar</a>
+                                           
+    @*@if (obj_Emp.estado == 3)
+                          {
+                             <a class="btn btn-warning" href="/Compania/Eliminar_Compania/@obj_Emp.id_E" style="width:80px; height:35px; display:none;" disabled="disabled">Eliminar</a>
+                          }
+                         else
+                          {
+                            <a class="btn btn-warning" href="/Compania/Eliminar_Compania/@obj_Emp.id_E" style="width:80px; height:35px;">Eliminar</a>
+                          }*@
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+-------------------------------------------------------------------------------------------------------------------
+<!--Empleado Nuevo-->
+
+@model Sindicato_v1.Models.ViewModels.AddEmpleadosViewModel
+
+@{
+    ViewBag.Title = "Nuevo Empleado";
+}
+
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Editar empleado</li>
+</ul>
+
+<div>
+    <h2>Editar empleado</h2>
+    <h5>Ingrese la informacion del nuevo departamento desee agregar</h5>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Nuevo_Empleado", "Empleado", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+
+            <!--PERSONA-->
+            <div>
+                <h5><b>Cédula</b></h5>
+                @Html.TextBoxFor(e => e.cedula, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.cedula, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Nombre</b></h5>
+                @Html.TextBoxFor(e => e.nombre, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.nombre, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Primer apellido</b></h5>
+                @Html.TextBoxFor(e => e.primer_apellido, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.primer_apellido, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Segundo apellido</b></h5>
+                @Html.TextBoxFor(e => e.segundo_apellido, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.nombre, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            @*este es un dropdown personalizado para las personas,como el de departamentos*@
+            @*<div>
+                @Html.LabelFor(e => e.Genero)
+                @Html.TextBoxFor(e => e.Genero, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.Genero, null, new { @class = "text-danger" })
+            </div>*@
+            <br />
+            <div>
+                <h5><b>Nacionalidad</b></h5>
+                @Html.TextBoxFor(e => e.nacionalidad, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.nacionalidad, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            @*este es un dropdown
+            <div>
+                @Html.LabelFor(e => e.id_ECivil)
+                @Html.TextBoxFor(e => e.id_ECivil, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.id_ECivil, null, new { @class = "text-danger" })
+            </div>
+            <br />*@
+            <div>
+                <h5><b>Fecha de nacimiento (dd/mm/aaaa)</b></h5>
+                @Html.TextBoxFor(e => e.fecha_Nac, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.fecha_Nac, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Teléfono</b></h5>
+                @Html.TextBoxFor(e => e.Telefono, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.Telefono, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Dirección</b></h5>
+                @Html.TextBoxFor(e => e.Direccion, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.Direccion, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Correo electrónico</b></h5>
+                @Html.TextBoxFor(e => e.correo_Electronico, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.correo_Electronico, null, new { @class = "text-danger" })
+            </div>
+            <br />
+
+            <!--Usuario-->
+            
+            <div>
+                <h5><b>Contraseña</b></h5>
+                @Html.TextBoxFor(e => e.contrasenia, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.contrasenia, null, new { @class = "text-danger" })
+            </div>
+            <br />
+
+            <!---Estos son dropdpwlist-->
+            @*<div>
+                @Html.LabelFor(e => e.id_Rol)
+                @Html.TextBoxFor(e => e.id_Rol, "", new { @class = "form-control " })
+
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.id_TipoUsu)
+                <br />
+                @Html.TextBoxFor(e => e.id_TipoUsu, "", new { @class = "form-control" })
+            </div>
+            <br />*@
+
+
+
+            <!--EMPLEADO-->
+
+            <div>
+                <h5><b>Cargo</b></h5>
+                @Html.TextBoxFor(e => e.cargo, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.cargo, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Superior inmediato</b></h5>
+                @Html.TextBoxFor(e => e.superior_Inmediato, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.superior_Inmediato, null, new { @class = "text-danger" })
+            </div>
+            <br />
+
+            @*este es un drop downlist
+            <div>
+                @Html.LabelFor(e => e.id_lugar)
+                @Html.TextBoxFor(e => e.id_lugar, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.id_lugar, null, new { @class = "text-danger" })
+            </div>*@
+            <br />
+
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+
+        </div>
+    </div>
+}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+<!--Estado Civil Editar-->
+
+@model Sindicato_v1.Models.ViewModels.AddECivilViewModel
+@{
+    ViewBag.Title = "Editar_ECivil";
+}
+
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Editar Estado Civil</li>
+</ul>
+
+<div>
+    <h2>Editar Estado Civil</h2>
+    <h5>Ingrese la nueva información en su respectivo campo</h5>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Editar_ECivil", "EstadoCivil", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            @Html.HiddenFor(d => d.id_ECiv)
+            <div>
+                <h5><b>Estado civil</b></h5>
+                @Html.TextBoxFor(d => d.est_Civil, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.est_Civil, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+<!--Estado Civil Mant-->
+
+@model List<Sindicato_v1.Models.ViewModels.SelectECivilViewModel>
+
+@{
+    ViewBag.Title = "Mant_ECivil";
+}
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Gestión de estados civil</li>
+</ul>
+
+<div>
+    <h2>Gestión de estados civil</h2>
+    <h5>Lista de los estados civíles que estan ingresados en el sistema</h5>
+</div>
+
+<hr class="hr-custom"/>
+
+<div class="container" style="text-align: left; padding: 5px;">
+    <a href="~/EstadoCivil/Nuevo_ECivil" class="btn btn-primary">Nuevo</a>
+</div>
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Estado civil</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj_ECiv in Model)
+                {
+                    <tr>
+                        <th>@obj_ECiv.id_ECiv</th>
+                        <td>@obj_ECiv.est_Civil</td>
+                        <td>
+                            <a class="btn btn-default" href="/EstadoCivil/Editar_ECivil/@obj_ECiv.id_ECiv" style="width:80px; height:35px;">Editar</a>
+                            @if (obj_ECiv.estado == 3)
+                            {
+                                <a class="btn btn-warning" href="/EstadoCivil/Eliminar_ECivil/@obj_ECiv.id_ECiv" style="width:80px; height:35px; display:none;">Eliminar</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-warning" href="/EstadoCivil/Eliminar_ECivil/@obj_ECiv.id_ECiv" style="width:80px; height:35px;">Eliminar</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+-------------------------------------------------------------------------------------------------------------------
+<!--Estado Civil Nuevo-->
+
+@model Sindicato_v1.Models.ViewModels.AddECivilViewModel
+@{
+    ViewBag.Title = "Nuevo_ECivil";
+}
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Agregar Estado Civil</li>
+</ul>
+
+<div>
+    <h2>Agregar Estado Civil</h2>
+    <h5>Ingrese el nuevo estado civil</h5>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Nuevo_ECivil", "EstadoCivil", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            <div>
+                <h5><b>Estado civil</b></h5>
+                @Html.TextBoxFor(d => d.est_Civil, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.est_Civil, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+<!--Gestiones Gestiones-->
+
+@model List<Sindicato_v1.Models.ViewModels.GestionesViewModel> 
+
+@{
+    ViewBag.Title = "Gestiones";
+}
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Gestiones de empleados</li>
+</ul>
+
+<div>
+    <h2>Gestiones de empleados</h2>
+    <h5>Lista de los empleados que laboran en el sindicato</h5>
+</div>
+
+<hr class="hr-custom"/>
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Primer apellido</th>
+                    <th>Segundo apellido</th>
+                    <th>Departamento</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj_Emp in Model)
+                {
+                <tr>
+                    <th>@obj_Emp.id_Emp</th>
+                    <td>@obj_Emp.nombre_emp</td>
+                    <td>@obj_Emp.apellido1</td>
+                    <td>@obj_Emp.apellido2 </td>
+                    <td>@obj_Emp.departamento</td>
+                    <td>
+                        <a class="btn btn-default" href="/Gestiones/Nueva_Gestion/@obj_Emp.id_Emp" style="width:150px; height:35px">Nueva Gestión</a>
+
+                    </td>
+                    <td>
+                        <a class="btn btn-default" href="/Gestiones/Eliminar_Gestion/@obj_Emp.id_Emp" style="width:150px; height:35px">Eliminar Gestión</a>
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+-------------------------------------------------------------------------------------------------------------------
+<!--Gestiones Nueva-->
+
+@model Sindicato_v1.Models.ViewModels.GestionesViewModel
+@{
+    ViewBag.Title = "Nueva_Gestion";
+}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li><a href="/Gestiones/Gestiones/">Gestiones</a></li>
+    <li>Nueva gestión</li>
+</ul>
+
+<div>
+    <h2>Nueva gestión</h2>
+    <h5>Ingrese la informacion de la nueva gestion que se desea agregar</h5>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Nueva_Gestion", "Gestiones", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        @Html.HiddenFor(g => g.id_Emp)
+        <div class="col-md-12">
+            <div>
+                <h5><b>Tipo de gestión</b></h5>
+                <br />
+                @Html.DropDownListFor(g => g.id_TipoGes, ViewBag.GestionList as SelectList, "---Selecione el tipo de gestión---", new { @class = "form-control validate[required]" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Motivo</b></h5>
+                @Html.TextBoxFor(g => g.motivo, "", new { @class = "form-control validate[required]" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <h3>Vacaciones</h3>
+            <hr />
+            <div>
+                <h5><b>Total de vacaciones</b></h5>
+                @Html.TextBoxFor(g => g.tot_vac, "", new { @class = "form-control", @readonly = "true" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Vacaciones disponibles</b></h5>
+                @Html.TextBoxFor(g => g.vac_rest, "", new { @class = "form-control", @readonly = "true" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Vacaciones utilizadas</b></h5>
+                @Html.TextBoxFor(g => g.vac_uti, "", new { @class = "form-control", @readonly = "true" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Vacaciones solicitadas</b></h5>
+                @Html.TextBoxFor(g => g.vac_solic, "", new { @class = "form-control" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Fecha de inicio de las vacaciones</b></h5>
+                <br />
+                @Html.EditorFor(g => g.f_inicio, "", new { @class = "form-control" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Fecha de finalización de las vacaciones</b></h5>
+                <br />
+                @Html.EditorFor(g => g.f_fin, "", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="column">
+            <h3>Ausencias</h3>
+            <hr/>
+            <div>
+                <h5><b>Ausencias injustificadas</b></h5>
+                @Html.TextBoxFor(g => g.cant_au_injus, "", new { @class = "form-control", @readonly = "true" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Asencias justificadas</b></h5>
+                @Html.TextBoxFor(g => g.cant_au_jus, "", new { @class = "form-control", @readonly = "true" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Fecha de la ausencia</b></h5>
+                <br />
+                @Html.EditorFor(g => g.f_aus, "", new { @class = "form-control" })
+            </div>
+            <br />
+            <div>
+                <h5><b>Días a ausentarse</b></h5>
+                @Html.TextBoxFor(g => g.cant_aus, "", new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <br />
+    <div style="text-align: right">
+        <input value="Confirmar" class="btn btn-primary" type="submit" />
+    </div>
+}
+
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+<!--Home Index-->
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<script>
+    $(window).scroll(function() {
+    var winScrollTop = $(window).scrollTop();
+    var winHeight = $(window).height();
+    var floaterHeight = $('#floater').outerHeight(true);
+    //true so the function takes margins into account
+    var fromBottom = 20;
+
+    var top = winScrollTop + winHeight - floaterHeight - fromBottom;
+    $('#floater').css({'top': top + 'px'});
+});
+</script>
+
+<body id="inicio" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#inicio">SIICE</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#acerca">Acerca de</a></li>
+                    <li><a href="#convenios">Convenios</a></li>
+                    <li><a href="#comunicados">Comunicados</a></li>
+                    <li><a href="#afiliacion">Afiliación</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="~/Usuario/Login">Ingresar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="floater">
+        <button type="" class="btn btn-lg btn-warning">Afíliese aquí</button>
+    </div>
+
+    <div class="jumbotron text-center">
+        <img src="~/Content/Resources/Images/logoSIICE.png" style="width: 30%; max-width:auto;">
+        <p>Sindicato de Ingenieros y Profesionales del ICE, RACSA y CNFL</p>
+    </div>
+
+    <!-- Container (About Section) -->
+    <div id="acerca" class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>Acerca de SIICE</h2><br>
+                <h4 style="text-align:justify;">SIICE es una organización privada, sin fines de lucro, creada por ingenieros del Instituto 
+                Costarricense de Electricidad (ICE).</h4><br>
+                <h4 style="text-align:justify;">Actualmente nuestro Sindicato agrupa ingenieros y profesionales que laboran para el <b>ICE, 
+                Radiográfica Costarricense S.A. (RACSA) y la Compañía Nacional de Fuerza y Luz (CNFL)</b>, así 
+                como profesionales de proyectos, contribuyendo a mejorar la calidad de vida de los costarricenses.</h4>
+                <br>
+                <button id="show_btn" class="btn btn-default btn-lg class_show">Ver más</button>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-signal logo"></span>
+            </div>
+            <div id="hidden" class="col-sm-12 class_show class_hide">
+                <hr class="hr-custom">
+                <h2>Historia</h2>
+                <h3>¿Quienes somos?</h3>
+                <p style="text-align:justify;">
+                    El SIICE se creó luego de dos congresos de ingenieros, en los que se habían hecho propuestas 
+                    interesantes como la creación un banco, atención médica institucional y la creación de una biblioteca 
+                    estrictamente técnica, todos estos servicios dentro del edificio del ICE en la sede de Sabana Norte. 
+                    Esas propuestas y otras, dieron origen a la necesidad de creación de un sindicato como organización formal, 
+                    mediante la cual poder llevar propuestas a la Administración Superior y luchar por resguardar y mejorar los 
+                    derechos de los trabajadores. Por ese motivo, un lema de los pioneros del SIICE fue <i>“se crea el Sindicato de
+                    Ingenieros del ICE para poder ejercer plenamente el derecho de ser escuchados”</i>.
+                </p>
+                <p style="text-align:justify;">
+                    En el primer congreso se inició la recolección de firmas para la creación del sindicato y 
+                    en el segundo congreso, celebrado el 15 de diciembre de 1971 en Cachí, se logró conformar el SIICE 
+                    con la participación de 95 afiliados.
+                    Inicialmente se pensó en un sindicato exclusivamente para ingenieros, principalmente por afinidad en 
+                    temas de interés. Desde los primeros años, se contó con afiliados de distintas zonas del país y se conformó 
+                    una Junta Directiva que se renovaba anualmente.
+                    Las reuniones de Junta Directiva del SIICE, se efectuaban inicialmente en la oficina del Ing. Hernán Acuña, 
+                    en el ICE sede de Sabana Norte, luego de la jornada laboral.
+                </p>
+                <p style="text-align:justify;">
+                    Posteriormente, se contó con otra oficina exclusivamente para el sindicato, la cual estaba dentro 
+                    del edificio de Sabana. Más adelante, se decidió que por seguridad, comodidad e independencia era mejor 
+                    alquilar algún local. Durante un tiempo se alquiló un espacio en Paseo Colón y actualmente las oficinas 
+                    del sindicato se encuentran en una oficina de alquiler en Sabana Oeste. Hace más de 10 años, se decidió 
+                    ampliar la oportunidad para que más personas ingresaran al SIICE y por eso se pasó de ser un sindicato de 
+                    ingenieros a ser un Sindicato de Ingenieros y Profesionales. En el 2006 se decidió ampliar la participación a 
+                    aquellos estudiantes que cursaran el último año de su carrera profesional y se permitió a los pensionados del 
+                    ICE o sus subsidiarias continuar formando parte del Sindicato.
+                    Actualmente SIICE cuenta con 800 afiliados del ICE, RACSA, CNFL y los Proyectos del ICE.
+                </p>
+                <hr class="hr-custom">
+                <h3>Algunos logros</h3>
+                <p style="text-align:justify;">• Contribuimos a que se crearan oficinas bancarias y de atención médica dentro de 
+                la institución. Esto existe actualmente dentro del ICE y es beneficioso no solo para los ingenieros, sino para 
+                todos los trabajadores.</p>
+                <p style="text-align:justify;">• Luchó SIICE por la equiparación de salarios, no por ventajas, sino por justicia; 
+                porque algunos salarios eran muy altos y otros muy bajos, a pesar de que en ocasiones tenían similar grado de 
+                responsabilidad.</p>
+                <p style="text-align:justify;">• También se trabajó porque se respetara la peligrosidad de cada trabajo,
+                principalmente por la gente que desarrollaba proyectos importantes para el país y que pasaba el día en túneles
+                u otros sitios con un nivel de peligrosidad mayor al de otros funcionarios.</p>
+                <p style="text-align:justify;">• Colaboramos también en la unión de ingenieros de diferentes especialidades,
+                que compartían conocimientos y aportes para la institución.</p>
+                <p style="text-align:justify;">• Se llevaron a cabo análisis y seguimientos a nivel interno relacionados con l
+                os derechos laborales o institucionales; por ejemplo, en cuanto a injusticias cometidas en contra de funcionarios
+                de la institución, o abusos cometidos en contra de la institución.</p>
+                <p style="text-align:justify;">• Desarrollo de un proyecto de vivienda en los inicios del sindicato, mediante el 
+                cual varios compañeros lograron hacerse de un lote para construcción de propiedad.</p>
+                <p style="text-align:justify;">• SIICE presentó el recurso ante la Sala Constitucional que obligó a la salida de 
+                la empresa Millicom, la cual se estableció en el país de forma inconstitucional.</p>
+                <p style="text-align:justify;">• Fuimos parte de la lucha contra el <i>“combo energético”</i> o <i>“combo del ICE”</i>.</p>
+                <p style="text-align:justify;">• Se ha participado en estudios de gran relevancia para el país y para la institución, 
+                por ejemplo estudios sobre la situación del sector eléctrico; estudios sobre el SIEPAC y sobre el AMI, entre muchos
+                otros temas.</p>
+                <p style="text-align:justify;">• Luchamos contra el TLC negociado con los Estados Unidos.</p>
+                <p style="text-align:justify;">• Análisis y propuestas de mejoría para distintos proyectos de ley en corriente 
+                legislativa.</p>
+                <hr class="hr-custom">
+                <h3>40 aniversario</h3>
+                <p>INGRESAR ARTICULO DE 40 aniversario.pdf</p>
+                <button id="hide_btn" class="btn btn-default btn-lg class_hide">Ver menos</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid text-left bg-grey">
+        <h2>Compañias asociadas</h2>
+        <div class="row text-center slideanim">
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <a href="https://www.grupoice.com/wps/portal"><img src="~/Content/Resources/Images/gice.png" style="max-width: 60%;height: auto;"></a>
+                    <p><strong>ICE - Instituto Costarricense de Electricidad S.A</strong></p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <a href="https://www.cnfl.go.cr"><img src="~/Content/Resources/Images/cnfl.png" style="max-width: 60%;height: auto;"></a>
+                    <p><strong>CNFL - Compañia Nacional de Fuerza y Luz S.A</strong></p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <a href="http://www.racsa.co.cr"><img src="~/Content/Resources/Images/racsa.png" style="max-width: 60%;height: auto;"></a>
+                    <p><strong>RACSA - Radiográfica Costarricense<br>S.A</strong></p>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="container-fluid bg-grey">
+            <div class="row">
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-globe logo slideanim"></span>
+                </div>
+                <div class="col-sm-8">
+                    <h2>Organización</h2>
+                    <h4 style="text-align:justify;">
+                        SIICE es una organización privada, sin fines de lucro, creada en 1971 por ingenieros del 
+                    Instituto Costarricense de Electricidad (ICE).
+                        Actualmente nuestro Sindicato agrupa ingenieros y profesionales que laboran para el ICE, 
+                    Radiográfica Costarricense S.A. (RACSA) y la Compañía Nacional de Fuerza y Luz (CNFL), 
+                    así como profesionales de Proyectos, contribuyendo a mejorar la calidad de vida de los costarricenses.
+                    </h4><br>
+                    <h4 style="text-align:justify;"><strong>Nuestra Misión</strong> 
+                    <br><i>"Promover el mejoramiento del Grupo ICE y el respeto a los derechos de los trabajadores que lo conforman".</i></h4>
+                </div>
+                <div class="col-sm-12">
+                    <hr class="hr-custom">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h4><strong>Junta Directiva</strong></h4>
+                            <p style="text-align:justify;">En Asamblea General Ordinaria del 2018 celebrada el  7 de diciembre, 
+                            se conformó la Junta Directiva del SIICE de la siguiente manera:</p>
+                            <p style="text-align:justify;">• Presidente: Dr. Carlos Stradi Granados</p>
+                            <p style="text-align:justify;">• Vicepresidente: Licda. Rocío Retana Hidalgo</p>
+                            <p style="text-align:justify;">• Secretario de Correspondencia: Ing. Jorge Rojas Solano</p>
+                            <p style="text-align:justify;">• Secretario de Actas: Ing. Fernando Arias Avendaño</p>
+                            <p style="text-align:justify;">• Secretario de Conflictos: Ing. Melvin Fernández Chanto</p>
+                            <p style="text-align:justify;">• Secretario de Organización: Ing. Osvaldo Vargas Pacheco</p>
+                            <p style="text-align:justify;">• Tesorero: Mag. Carlos Hernández Barboza</p>
+                            <p style="text-align:justify;">• Vocal I: Mag. Nora Fernández Álvarez</p>
+                            <p style="text-align:justify;">• Vocal II: MSc. Alba Gómez Valle</p>
+                            <p style="text-align:justify;">• Fiscal: Ing. Orlando Murillo Alvarado</p>
+                            <p style="text-align:justify;">• Delegado General de la FIPROFYL: MSc. David Chacón Arguello</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4><strong>Junta Directiva de la Filial de la CNFL</strong></h4>
+                            <p style="text-align:justify;">La Junta Directiva de la Filial de Profesionales de la CNFL en el SIICE, 
+                            está conformada por los siguientes miembros:</p>
+                            <p style="text-align:justify;">• Delegado General: David Chacón Argüello</p>
+                            <p style="text-align:justify;">• Delegado Adjunto: Jose Fonseca Araya</p>
+                            <p style="text-align:justify;">• Tesorero: Roger Castillo Navas</p>
+                            <p style="text-align:justify;">• Secretaría de Comunicación y Divulgación: Roberto Sandí Araya</p>
+                            <p style="text-align:justify;">• Secretaría de Actualización Profesional: Laura Avellan Berrocal</p>
+                            <p style="text-align:justify;">• Secretaría de Actas: Adriana Álvarez Villalobos</p>
+                            <p style="text-align:justify;">• Vocal: Leticia Campos Blanco</p>
+                            <p style="text-align:justify;">• Fiscal: Alba Gómez Valle</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4><strong>Personal Administrativo</strong></h4>
+                            <p style="text-align:justify;">• Licda. Natalia Astúa González (Directora Ejecutiva)</p>
+                            <p style="text-align:justify;">• Srita. Patricia Angulo Castillo  (Secretaria Ejecutiva)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <hr class="hr-custom">
+                    <h2>Objetivos y Servicios</h2>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4><strong>Nuestros objetivos</strong></h4>
+                            <p style="text-align:justify;">• Mantener y desarrollar canales de comunicación con el Gobierno, Diputados,
+                            Administración Superior de las empresas del Grupo ICE, Sindicatos y otros.</p>
+                            <p style="text-align:justify;">• Velar por el cumplimiento de los fines públicos asignados a las empresas del Grupo ICE.</p>
+                            <p style="text-align:justify;">• Asegurar una adecuada relación Grupo ICE - Empleado.</p>
+                            <p style="text-align:justify;">• Recibir, estudiar y actuar sobre denuncias particulares de interés nacional e institucional.</p>
+                            <p style="text-align:justify;">• Analizar, preparar y difundir estudios para incrementar el desempeño institucional.</p>
+                            <p style="text-align:justify;">• Mantener informados a nuestros afiliados sobre asuntos estratégicos de incidencia nacional
+                            e institucional.</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4><strong>Servicios brindados</strong></h4>
+                            <p style="text-align:justify;">• Asesoría legal.</p>
+                            <p style="text-align:justify;">• Apoyo a los afiliados en la atención de conflictos laborales.</p>
+                            <p style="text-align:justify;">• Representación sindical.</p>
+                            <p style="text-align:justify;">• Realización del seminario de fin de año, cuyo objetivo es la capacitación en temas técnicos y de actualidad.</p>
+                            <p style="text-align:justify;">• Eventos especiales (celebración del día de la madre, foros y otros).</p>
+                            <p style="text-align:justify;">• Convenios de descuentos con otras instituciones (universidades, librerías, entre otros.).</p>
+                            <p style="text-align:justify;">• Atención de consultas y solicitudes específicas de nuestros afiliados.</p>
+                            <p style="text-align:justify;">• Promoción de eventos tecnológicos para la actualización profesional de los afiliados.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <hr class="hr-custom">
+                    <h2>Legislación y reglamentos</h2>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4><strong>En esta sección encontrará documentos relacionados con la legislación del SIICE. Para descargarlos, simplemente haga click en el nombre del documento.</strong></h4>
+                            <a class="btn btn-secondary" href="#" role="button"><h5>Link 1 para descargar</h5></a>
+                            <br>
+                            <a class="btn btn-secondary" href="#" role="button"><h5>Link 2 para descargar</h5></a>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4><strong>Otros Reglamentos</strong></h4>
+                            <a class="btn btn-secondary" href="#" role="button"><h5>Link 1 para descargar</h5></a>
+                            <br>
+                            <a class="btn btn-secondary" href="#" role="button"><h5>Link 2 para descargar</h5></a>
+                            <br>
+                            <a class="btn btn-secondary" href="#" role="button"><h5>Link 3 para descargar</h5></a>
+                            <br>
+                            <a class="btn btn-secondary" href="#" role="button"><h5>Link 4 para descargar</h5></a>
+                            <br>
+                            <a class="btn btn-secondary" href="#" role="button"><h5>Link 5 para descargar</h5></a>
+                            <br>
+                            <a class="btn btn-secondary" href="#" role="button"><h5>Link 6 para descargar</h5></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <hr class="hr-custom">
+                    <h2>Tribunal de honor</h2>
+                    <h4><strong>¿Qué es el Tribunal de Honor del SIICE?</strong></h4>
+                    <p style="text-align:justify;">El Tribunal de Honor es uno de los órganos que forma parte de la estructura del 
+                    SIICE, según los capítulos 47 al 56 de los Estatutos del Sindicato.</p>
+                    <p style="text-align:justify;">Su función primordial es atender toda queja que se presente contra algún miembro 
+                    del sindicato, que tenga como fundamento la violación del Código de Ética Profesional 
+                    que incluye el Estatuto del SIICE, para estudiar el caso y emitir un informe.</p><br>
+                    <h4><strong>Miembros del Tribunal de Honor</strong></h4>
+                    <p style="text-align:justify;">• Ing. Eugenia Gutiérrez Castro.</p>
+                    <p style="text-align:justify;">• Ing. Marianela Ramírez Leiva.</p>
+                    <p style="text-align:justify;">• Ing. Marco Parajeles Zamora.</p>
+                    <p style="text-align:justify;">• Ing. Sara Salazar Badilla (presidenta).</p>
+                    <p style="text-align:justify;">• Lic. Ronald Wright Ceciliano.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Container (Benefits Section) -->
+        <div id="convenios" class="container-fluid text-center">
+            <h2>Convenios destacados</h2>
+            <br>
+            <div class="row slideanim">
+                <div class="col-sm-4">
+                    <a href=""><img src="~/Content/Resources/Images/conuci.png" alt="image 1" class="img-thumbnail" style="max-width:100%;height: auto;"></a>
+                </div>
+                <div class="col-sm-4">
+                    <a href=""><img src="~/Content/Resources/Images/conyuxta.png" alt="image 2" class="img-thumbnail" style="max-width:100%;height: auto;"></a>
+                </div>
+                <div class="col-sm-4">
+                    <a href=""><img src="~/Content/Resources/Images/conswan.png" alt="image 3" class="img-thumbnail" style="max-width:100%;height: auto;"></a>
+                </div>
+            </div>
+            <br><br>
+            <div class="row slideanim">
+                <hr class="hr-custom"><br>
+                <h2>Otros convenios</h2><br>
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-cutlery logo-small"></span>
+                    <h4><a href="#">Alimentación (3)</a></h4>
+                </div>
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-plus logo-small"></span>
+                    <h4><a href="#">Funerarias (2)</a></h4>
+                </div>
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-phone logo-small"></span>
+                    <h4><a href="#">Tecnología (4)</a></h4>
+                </div>
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-road logo-small"></span>
+                    <h4><a href="#">Transporte (2)</a></h4>
+                </div>
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-education logo-small"></span>
+                    <h4><a href="#">Educación (6)</a></h4>
+                </div>
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-heart-empty logo-small"></span>
+                    <h4><a href="#">Salud (14)</a></h4>
+                </div>
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-credit-card logo-small"></span>
+                    <h4><a href="#">Tiendas departamentales (1)</a></h4>
+                </div>
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-bed logo-small"></span>
+                    <h4><a href="#">Turismo (20)</a></h4>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Container (News Section) -->
+        <div id="comunicados" class="container-fluid text-center bg-grey">
+            <h2>Comunicados</h2><br>
+            <!---->
+            <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <div class="well">
+                            <h4>Administración Superior: Fortalecimiento del ICE o doble discurso</h4>
+                            <p>Comunicado SIICE<a class="btn btn-secondary" href="#" role="button">Ver detalles»</a></p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="well">
+                            <h4>Administración Superior: Fortalecimiento del ICE o doble discurso</h4>
+                            <p>Comunicado SIICE<a class="btn btn-secondary" href="#" role="button">Ver detalles»</a></p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="well">
+                            <h4>Administración Superior: Fortalecimiento del ICE o doble discurso</h4>
+                            <p>Comunicado SIICE<a class="btn btn-secondary" href="#" role="button">Ver detalles»</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Container (Affiliation Section) -->
+        <div id="afiliacion" class="container-fluid">
+            <div class="col-sm-12">
+                <h2 class="text-center">Afiliación</h2>
+                <hr class="hr-custom">
+                <h3><strong>Afíliese</strong></h3>
+                <h4 style="text-align:justify;">Si desea afiliarse al Sindicato, sírvase llenar la siguiente boleta y enviarla por 
+                fax o por correo electrónico:</h4>
+                <a class="btn btn-primary" href="#" role="button">Boleta para afiliación</a>
+                <h4><strong>Fax:</strong> 2290-8803</h4>
+                <h4><strong>Correo electrónico:</strong> siice@ice.go.cr</h4>
+                <hr class="hr-custom">
+                <h3><strong>En caso de la C.N.F.L</strong></h3>
+                <h4>Por favor escanear y remitir al casillero de FIPROFYL:</h4>
+                <a class="btn btn-primary" href="#" role="button">Boleta para afiliación</a>
+                <h4><strong>Fax:</strong> 2290-8803</h4>
+                <h4><strong>Correo electrónico:</strong>  filprofe@cnfl.go.cr</h4>
+            </div>
+            <!---->
+        </div>
+
+        <!-- Container (Contact Section) -->
+        <div id="contacto" class="container-fluid bg-grey">
+            <h2 class="text-center">Contáctenos</h2>
+            <div class="row">
+                <div class="col-sm-5">
+                    <p>Información para contacto:</p>
+                    <p><span class="glyphicon glyphicon-map-marker"></span><a href="https://www.google.com/maps/place/SIICE/9.931542,-84.097622,17z/data=!3m1!4b1!4m2!3m1!1s0x8fa0e353b730380b:0xa59e4ef8f35be59f" target="_blank"> Sabana Sur, del Restaurante Mc Donald’s 100 metros este y 50 metros sur</a></p>
+                    <p><span class="glyphicon glyphicon-phone"></span> +506 2290-8801 / 2290-8802</p>
+                    <p>
+                        <span class="glyphicon glyphicon-envelope"></span>
+                        <script>
+                            emailE = ('siice' + '' + 'ice.go.cr')
+                            document.write('<a href="mailto:' + emailE + '">' + emailE + '</a>')
+                        </script>
+                    </p>
+                </div>
+                <div class="col-sm-7 slideanim">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <input class="form-control" id="name" name="name" placeholder="Su nombre..." type="text" required>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <input class="form-control" id="email" name="email" placeholder="Su correo electrónico..." type="email" required>
+                        </div>
+                    </div>
+                    <textarea class="form-control" id="comments" name="comments" placeholder="Su mensaje..." rows="5"></textarea><br>
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+                            <button class="btn btn-default pull-right" type="submit">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2 style="text-align:center">Encuentrenos aquí</h2>
+            <!--The div element for the map -->
+            <div id="map"></div>
+            <script>
+                // Initialize and add the map
+                function initMap() {
+                    // The location of Uluru
+                    var uluru = { lat: 9.9315422, lng: -84.099816 };
+                    // The map, centered at Uluru
+                    var map = new google.maps.Map(
+                        document.getElementById('map'), { zoom: 15, center: uluru });
+                    // The marker, positioned at Uluru
+                    var marker = new google.maps.Marker({ position: uluru, map: map });
+                }
+            </script>
+            <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAMrbq-jHtyywholABFaIH6RWth6I8qxg&callback=initMap">
+            </script>
+        </div>
+
+        <footer class="container-fluid text-center">
+            <a href="#inicio" title="To Top">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+            <!--<p>Copyright © 2019 SIICE S.A - Powered by Anoymus Marketing</p>
+            <p>Theme Made By <a href="#" title="Visit us"></a></p>-->
+        </footer>
+</body>
+-------------------------------------------------------------------------------------------------------------------
+<!--Rol Editar-->
+
+@model Sindicato_v1.Models.ViewModels.AddRolesViewModel
+@{
+    ViewBag.Title = "Nuevo_Rol";
+}
+
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Editar rol</li>
+</ul>
+
+<div>
+    <h2>Editar rol</h2>
+    <h5>Ingrese la nueva información en su respectivo campo</h5>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Editar_Rol", "Rol", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            @Html.HiddenFor(f => f.id_R)
+            <div>
+                <h5><b>Rol</b></h5>
+                @Html.TextBoxFor(f => f.rol, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.rol, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+<!--Rol Mant-->
+
+@model List<Sindicato_v1.Models.ViewModels.SelectRolesViewModel>
+
+@{
+    ViewBag.Title = "Mant_Rol";
+}
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Gestión de rol</li>
+</ul>
+
+<div>
+    <h2>Gestión de rol</h2>
+    <h5>Lista de los roles registrados en el sistema</h5>
+</div>
+
+<hr class="hr-custom"/>
+
+<div class="container" style="text-align: left; padding: 5px;">
+    <a href="~/Rol/Nuevo_Rol" class="btn btn-primary">Nuevo</a>
+</div>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Rol</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj_Rol in Model)
+                {
+                    <tr>
+                        <th>@obj_Rol.id_R</th>
+                        <td>@obj_Rol.rol</td>
+                        <td>
+                            <a class="btn btn-default" href="/Rol/Editar_Rol/@obj_Rol.id_R" style="width:80px; height:35px">Editar</a>
+                            @if (obj_Rol.estado == 3)
+                            {
+                                <a class="btn btn-warning" href="/Rol/Eliminar_Rol/@obj_Rol.id_R" style="width:80px; height:35px; display:none;">Eliminar</a>
+
+                            }
+                            else
+                            {
+                                <a class="btn btn-warning" href="/Rol/Eliminar_Rol/@obj_Rol.id_R" style="width:80px; height:35px">Eliminar</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+-------------------------------------------------------------------------------------------------------------------
+<!--Rol Nuevo-->
+
+@model Sindicato_v1.Models.ViewModels.AddRolesViewModel
+@{
+    ViewBag.Title = "Nuevo_Rol";
+}
+
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Agregar rol</li>
+</ul>
+
+<div>
+    <h2>Agregar rol</h2>
+    <h5>Ingrese la informacion del nuevo rol que se desea agregar</h5>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Nuevo_Rol", "Rol", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            <div>
+                <h5><b>Rol</b></h5>
+                @Html.TextBoxFor(f => f.rol, "", new { @class = "form-control validate[required, custom[onlyLetterSp]]" })
+                @Html.ValidationMessageFor(d => d.rol, null, new { @class = "text-danger" }) 
+            </div>
+            <br />
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
+-------------------------------------------------------------------------------------------------------------------
+<!--Usuario _Login-->
+
+@{
+    ViewBag.Title = "Login";
+}
+<br>
+<br>
+<link href="~/Content/LoginStyle.css" rel="stylesheet" />
+
+<div style="text-align: center">
+    <h2>Inicie sesión ahora</h2>
+</div>
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="~/Home/Index">SIICE</a>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="~/Content/Resources/Images/logoSIICE_Login.png" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- Login Form -->
+        <form action="~/Usuario/Login">
+            <h3>
+                ¡Usuario inválido, por favor inténtelo de nuevo!
+            </h3>
+            <input type="submit" class="fadeIn fourth" value="Reintentar">
+        </form>
+        @*<a href="~/Usuario/Login" type="submit" class="fadeIn fourth" value="Reintentar"></a>
+            <a class="fadeIn fourth" href="~/Usuario/Login">Reintentar</a>*@
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <a class="underlineHover" href="~/Usuario/StarRecovery">¿Olvidó su contraseña?</a>
+        </div>
+    </div>
+</div>
+
+
+<!--Validadciones-->
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+-------------------------------------------------------------------------------------------------------------------

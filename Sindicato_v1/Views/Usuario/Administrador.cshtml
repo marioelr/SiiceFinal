@@ -1,0 +1,250 @@
+﻿@model List<Sindicato_v1.Models.ViewModels.SelectAgremiadosViewModel>
+@{
+    ViewBag.Title = "Administrador";
+}
+<br />
+<br />
+<br />
+
+<link href="~/Content/sticky-notes.css" rel="stylesheet" />
+@*<link rel="stylesheet" href="~/Content/style.css">
+    <script type="text/javascript" src="~/Scripts/js.js"></script>*@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="~/Usuario/Documentos">Documentos</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+                <li><a href="~/Usuario/close_session" onclick="return LeaveConfirm()"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="https://localhost:44378/#inicio">SIICE - Inicio</a></li>
+    <li>Administrativo</li>
+</ul>
+
+<div>
+    <div class="row">
+        <div class="col-sm-3 sidenav">
+            <div class="text-center">
+                <h2><span class="glyphicon glyphicon-user"></span> Mi perfil</h2>
+            </div>
+            <div class="sidebar">
+                <a class="btn btn-default" href="~/Usuario/StarRecovery">Cambiar mi contraseña</a>
+            </div>
+            <div class="text-center">
+                <h2><span class="glyphicon glyphicon-list-alt text-center"></span> Reportes</h2>
+            </div>
+            <div class="sidebar">
+                <a id="btnLoadReport_Ded">Reporte deducciones</a>
+                <a id="btnLoadReport_Agr">Reporte agremiados</a>
+            </div>
+
+            <div class="text-center">
+                <h2><span class="glyphicon glyphicon-wrench text-center"></span> Mantenimientos</h2>
+            </div>
+            <div class="sidebar">
+                <a href="~/Rol/Mant_Rol">Roles</a>
+                <a href="~/Departamento/Mant_Departamento">Departamentos</a>
+                <a href="~/Compania/Mant_Compania">Compañías</a>
+                <a href="~/Empleado/Mant_Empleado">Empleados</a>
+                <a href="~/EstadoCivil/Mant_ECivil">Estados Civiles</a>
+            </div>
+
+        </div>
+        <div class="col-sm-9">
+
+            <h2 class="notification text-center">
+                <span class="glyphicon glyphicon-envelope"></span>
+                Solicitudes pendientes
+                <span class="badge">@ViewData["Conteo"]</span>
+            </h2>
+
+            <h5>Ultimas solicitudes, @DateTime.Now.ToString()</h5>
+
+            <br />
+
+            <div id="showed" class="class_hide">
+                <div class="table-responsive">
+                    @Html.Hidden("Get", Url.Action("Get", "Notification"))
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Cédula</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblInfo">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <button id="show_btn" class="btn btn-custom1 btn-block class_show class_hide">Vista detallada</button>
+            </div>
+
+            <div id="hidden" class="row class_show">
+                @if (Model != null)
+                {
+                    <br />
+                    <div class="row">
+                        <div class="table-responsive col-lg-12">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Apellidos</th>
+                                        <th></th>
+                                        <th>Teléfono</th>
+                                        <th>F. Registro</th>
+                                        <th>Solicitud</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var agremiado in Model)
+                                    {
+                                        <tr>
+                                            <td>@agremiado.nombre</td>
+                                            <td>@agremiado.primer_Apellido</td>
+                                            <td>@agremiado.segundo_Apellido </td>
+                                            <td>@agremiado.telefono</td>
+                                            <td>@agremiado.fecha_reg</td>
+                                            <td><a id="btnLoadSoli">Solicitud de afiliación</a></td>
+                                            <td>
+                                                <a class="btn btn-default" onclick="return AceptConfirm();" href="/Usuario/aceptar_Soli/@agremiado.id_Persona" style="width:80px; height:35px">✓</a>
+                                                <a class="btn btn-warning" onclick="return DeleteConfirm();" href="/Usuario/rechazar_Soli/@agremiado.id_Persona" style="width:80px; height:35px">✖</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+                <div>
+                    <button id="hide_btn" class="btn btn-custom1 btn-block class_hide">Vista resumida</button>
+                </div>
+            </div>
+
+            <hr class="hr-custom" />
+
+            <div class="row">
+                <div class="column text-center">
+                    <div class="col-lg-12">
+                        <h2><span class="glyphicon glyphicon-calendar"></span> Fecha y hora</h2>
+                        <br />
+                        <br />
+                        <section class="col-lg-10">
+                            @Html.Partial("_AdministradorCalendarPartial")
+                        </section>
+                    </div>
+                </div>
+                <div class="column text-center">
+                    <div class="col-lg-12">
+                        <h2><span class="glyphicon glyphicon glyphicon-edit"></span> Notas rápidas</h2>
+                        <div id="board-b" class="col-lg-5">
+                            <input class="add-btn" type="button" value="+" id="btn-addNote" />
+                            <div id="board"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/show-hide-requests.js"></script>
+
+@if (ViewBag.Msg == "Aprobado")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Confirmación",
+                text: "¡Se aceptó la solicitud de afiliación!",
+                icon: "success"
+            });
+        }
+    </script>
+}
+
+@if (ViewBag.Msg == "Modificado")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Confirmación",
+                text: "¡Se modificó exitosamente!",
+                icon: "info"
+            });
+        }
+    </script>
+}
+
+@if (ViewBag.Msg == "Eliminado")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "Confirmación",
+                text: "¡Se rechazó la solicitud de afiliación!",
+                icon: "warning"
+            });
+        }
+    </script>
+}
+
+@if (ViewBag.Msg == "Error")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "ERROR",
+                text: "¡Este elemento no se puede eliminar porque está siendo utilizado!",
+                icon: "error"
+            });
+        }
+    </script>
+}
+
+<script type="text/javascript">
+    function AceptConfirm() {
+        if (confirm("¿Aceptar solicitud?"))
+            return true;
+        else
+            return false;
+    }
+</script>
+
+<script type="text/javascript">
+    function DeleteConfirm() {
+        if (confirm("¿Rechazar solicitud?"))
+            return true;
+        else
+            return false;
+    }
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/themes/base/jquery-ui.css"></script>
+<script src="~/Scripts/sticky.js"></script>

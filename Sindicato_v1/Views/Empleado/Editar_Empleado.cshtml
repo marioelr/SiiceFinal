@@ -1,0 +1,203 @@
+﻿@model Sindicato_v1.Models.ViewModels.AddEmpleadosViewModel
+
+@{
+    ViewBag.Title = "Editar Empleado";
+}
+
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br />
+<br />
+<br />
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://localhost:44378/#inicio">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="~/Usuario/Documentos">Documentos</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+                <li><a href="~/Usuario/close_session" onclick="return LeaveConfirm()"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="https://localhost:44378/#inicio">SIICE - Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Editar Empleado</li>
+</ul>
+
+<div>
+    <h2>Editar Empleado</h2>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Editar_Empleado", "Empleado", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            @Html.HiddenFor(p => p.id_Persona)
+
+            <!--PERSONA-->
+            <div>
+                @Html.LabelFor(e => e.cedula)
+                @Html.TextBoxFor(e => e.cedula, "", new { @class = "form-control validate[required, custom[onlyNumberSp]]" })
+                @Html.ValidationMessageFor(e => e.cedula, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.nombre)
+                @Html.TextBoxFor(e => e.nombre, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]" })
+                @Html.ValidationMessageFor(e => e.nombre, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.primer_apellido)
+                @Html.TextBoxFor(e => e.primer_apellido, "", new { @class = "form-control validate[required,custom[onlyLetterAccentSp]]" })
+                @Html.ValidationMessageFor(e => e.primer_apellido, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.segundo_apellido)
+                @Html.TextBoxFor(e => e.segundo_apellido, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]" })
+                @Html.ValidationMessageFor(e => e.nombre, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.Genero)
+                <br />
+                @Html.DropDownList("genero", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text = "Femenino"},
+                    new SelectListItem{ Text = "Masculino"}
+                }, "Seleccione género", new { @class = "form-control validate[required]" })
+                @Html.ValidationMessageFor(e => e.Genero, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.nacionalidad)
+                @Html.DropDownListFor(e => e.nacionalidad, ViewBag.Country as SelectList, "Seleccione su país", new { @class = "form-control validate[required]" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(d => d.id_ECivil)
+                <br />
+                @Html.DropDownListFor(d => d.id_ECivil, ViewBag.EstadoCivilList as SelectList, "Seleccione estado civil", new { @class = "form-control validate[required]" })
+                <br />
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.fecha_Nac)
+                @Html.EditorFor(model => model.fecha_Nac, new { htmlAttributes = new { @class = "form-control validate[required]" } })
+                @Html.ValidationMessageFor(model => model.fecha_Nac, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.Telefono)
+                @Html.TextBoxFor(e => e.Telefono, "", new { @class = "form-control validate[required,custom[onlyNumberSp]]" })
+                @Html.ValidationMessageFor(e => e.Telefono, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.Direccion)
+                @Html.TextBoxFor(e => e.Direccion, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]" })
+                @Html.ValidationMessageFor(e => e.Direccion, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.correo_Electronico)
+                @Html.TextBoxFor(e => e.correo_Electronico, "", new { @class = "form-control validate[required, custom[email]]" })
+                @Html.ValidationMessageFor(e => e.correo_Electronico, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(d => d.id_Rol)
+                <br />
+                @Html.DropDownListFor(d => d.id_Rol, ViewBag.RolList as SelectList, "Seleccione rol", new { @class = "form-control validate[required]" })
+                @Html.ValidationMessageFor(d => d.id_Rol, null, new { @class = "text-danger " })
+                <br />
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(d => d.id_TipoUsu)
+                <br />
+                @Html.DropDownListFor(d => d.id_TipoUsu, ViewBag.UsuarioList as SelectList, "Seleccione tipo usuario", new { @class = "form-control validate[required]" })
+                @Html.ValidationMessageFor(d => d.id_TipoUsu, null, new { @class = "text-danger " })
+                <br />
+            </div>
+            <br />
+
+            <!--EMPLEADO-->
+            <div>
+                @Html.LabelFor(d => d.id_Departamento)
+                <br />
+                @Html.DropDownListFor(d => d.id_Departamento, ViewBag.DepList as SelectList, "Seleccione departamento", new { @class = "form-control validate[required]" })
+                @Html.ValidationMessageFor(d => d.id_Departamento, null, new { @class = "text-danger " })
+                <br />
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.cargo)
+                @Html.TextBoxFor(e => e.cargo, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]" })
+                @Html.ValidationMessageFor(e => e.cargo, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.superior_Inmediato)
+                @Html.TextBoxFor(e => e.superior_Inmediato, "", new { @class = "form-control validate[required, custom[onlyLetterAccentSp]]" })
+                @Html.ValidationMessageFor(e => e.superior_Inmediato, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+
+<script type="text/javascript">
+    $('#fecha_Nac').change(function () {
+
+        var date1 = moment($('#fecha_Nac').val());
+
+        var today = Date.now();
+
+        if (date1 > today) {
+            swal("¡Atención!", "La fecha de nacimiento no puede ser una fecha futura.");
+            $('#fecha_Nac').val(null);
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>

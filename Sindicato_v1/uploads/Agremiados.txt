@@ -1,0 +1,60 @@
+@model List<Sindicato_v1.Models.ViewModels.SelectAgremiadosViewModels>
+
+@{
+    ViewBag.Title = "Agremiados";
+}
+
+
+<div>
+    <h3>Gestión de Agremiados</h3>
+</div>
+
+
+@using (Html.BeginForm("Agremiados","Agremiados",FormMethod.Post))
+{
+    <div>
+        @Html.TextBox("cedula","")
+        <button type="submit">Buscar</button>
+    </div>
+}
+
+@if (Model!=null)
+{
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Nombre</th>
+                        <th>Primer Apellido</th>
+                        <th>Segundo Apellido</th>
+                        <th>Telefono</th>
+                        <th>Correo Electronico</th>
+                        <th>Puesto</th>
+                        <th>Profesion</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var agremiado in Model)
+                    {
+                        <tr>
+                            <th>@agremiado.cedula</th>
+                            <td>@agremiado.nombre</td>
+                            <td>@agremiado.primer_Apellido</td>
+                            <td>@agremiado.segundo_Apellido </td>
+                            <td>@agremiado.telefono</td>
+                            <td>@agremiado.correo_Electronico</td>
+                            <td>@agremiado.puesto</td>
+                            <td>@agremiado.profesion</td>
+                            <td>
+                                <a class="btn btn-default" href="/Compania/Editar_Compania/@agremiado.cedula" style="width:80px; height:35px">Editar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        </div>
+        }
